@@ -1,2 +1,2 @@
-# ValentinHebert.github.io
+# valentinhebert.github.io
 Valentin Hébert's website hosted.
