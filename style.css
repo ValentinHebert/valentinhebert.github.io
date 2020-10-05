@@ -1,0 +1,185 @@
+:root {
+    --accent-sec: #000000;
+    --accent-prim: #ffffff;
+    --accenttxt: var(--accent-prim);
+    --VHTRP-txttr: 0.25s ease;
+}
+:root.photographie {
+    --accent-sec: #ffffff;
+    --accent-prim: #000000;
+}
+
+::selection {
+    color: var(--accent-sec);
+    background-color: var(--accent-prim);
+}
+body {
+    margin: 0;
+    font-family: "Roboto Slab";
+    font-weight: 500;
+    color: var(--accenttxt);
+}
+
+/*--/ SWUP /--*/
+.transition-vh {
+    opacity: 1;
+    transition: 0.5s;
+}
+html.is-animating .transition-vh {
+    opacity: 0;
+}
+
+
+#vhtrp {
+    z-index: 1000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+.vhtrp-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    stroke: transparent;
+}
+
+
+/*-/ NAVIGATION MENU /-*/
+#container {
+    display: table;
+    position: absolute;
+    width: 92.5%;
+    height: 100%;
+    padding-left: 5%;
+    padding-right: 2.5%;
+    background-color: grey; /*temp*/
+}
+
+#nav-pos {
+    z-index: 1100;
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 100%;
+    text-align: left;
+    color: var(--accenttxt);
+    transition: color var(--VHTRP-txttr);
+}
+
+.nav-separator {
+    width: 100%;
+    height: 4px;
+    margin: 10px 0;
+    background-color: var(--accenttxt);
+    transition: background-color var(--VHTRP-txttr);
+}
+
+#nav-txt {
+    letter-spacing: 1px;
+}
+
+/*/ nav-TXT /*/
+.nav-name {
+    line-height: 1.05;
+}
+#wn-v {
+    font-weight: 500;
+    font-size: clamp(25px, 3.7vw, 55px);
+}
+#wn-h {
+    font-weight: 600;
+    font-size: clamp(40px, 6vw, 90px);
+}
+
+/*/ NAV /*/
+nav, #nav-social {
+    margin-top: 30px;
+}
+.navlink {
+    display: block;
+    position: relative;
+    padding: 8.5px 0;
+    line-height: 1.25;
+    text-decoration: none;
+    font-size: clamp(17.5px, 2.5vw, 25px);
+    letter-spacing: 1.5px;
+    transition: letter-spacing 0.6s cubic-bezier(0.3, 0.6, 0, 1);
+}
+.navlink > div {
+    display: block;
+    /*display: flex;
+    flex-direction: column;
+    align-items: center;*/
+    position: relative;
+    width: max-content;
+    padding-bottom: 3px;
+}
+.nav-sel {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--accenttxt);
+    transition: 0.6s cubic-bezier(0.6, 0.4, 0, 1),
+                background-color var(--VHTRP-txttr),
+                height 0.15s cubic-bezier(0.8, 0.8, 0, 1);
+    will-change: width, height, background-color;
+}
+.navlink > div > span {
+    position: relative;
+    color: var(--accenttxt);
+    transition: color var(--VHTRP-txttr);
+}
+
+.navlink:hover,
+.navlink:active {
+    letter-spacing: 0.5px;
+    transition: letter-spacing 0.3s cubic-bezier(0.2, 0.6, 0, 1);
+}
+.navlink:hover .nav-sel, .nl-current {
+    width: 100%;
+    transition: 0.3s cubic-bezier(0.3, 0.7, 0, 1),
+                background-color var(--VHTRP-txttr);
+}
+.navlink:active .nav-sel {
+    width: 100%;
+    height: 0;
+    transition: 0.1s cubic-bezier(0, 0.8, 0, 1.15) !important;
+}
+
+.nl-current {
+    letter-spacing: 1.5px !important;
+    transition: color var(--VHTRP-txttr),
+                0.3s cubic-bezier(0.2, 0.5, 0, 1) !important;
+}
+.nlsel-current {
+    width: 100% !important;
+}
+
+#ws-ig {
+    display: block;
+    width: 32px;
+    height: 32px;
+    fill: var(--accenttxt);
+    transition: fill var(--VHTRP-txttr);
+}
+
+
+/*-/ CONTENT /-*/
+#content-container {
+    display: table-cell;
+    width: 100%;
+    height: 100%;
+    padding-left: 5%;
+}
+main#swup {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
