@@ -2,7 +2,8 @@ const swup = new Swup({
     animateHistoryBrowsing: true
 });
 
-var vhtrpColor = {"photographie" : "#f0f0f0", "video" : "#0f0f0f", "contact" : "#333333"};
+var vhtrpColor = {"photographie" : "#f0f0f0", "video" : "#0f0f0f", "contact" : "#333333"},
+    svgNS = "http://www.w3.org/2000/svg";
 
 function init() {
     var navPos = document.querySelector("#nav-pos");
@@ -65,8 +66,8 @@ function init() {
                 } else { document.documentElement.classList.remove("photographie"); }
 
                 // VHTRP
-                var newVHTRC = document.createElementNS("http://www.w3.org/2000/svg", "svg"),
-                    newVHTRCc = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                var newVHTRC = document.createElementNS(svgNS, "svg"),
+                    newVHTRCc = document.createElementNS(svgNS, "circle");
                 newVHTRC.classList.add("vhtrp-circle"); newVHTRC.id = nlID;
                 newVHTRC.setAttribute("viewBox", "0 0 " + (pageW / 100) + " " + (pageH / 100)); 
                 newVHTRC.style.fill = vhtrpColor[nlID];
@@ -75,18 +76,23 @@ function init() {
 
 
                 var nltxt = document.querySelector(".navlink#" + nlID + " span"),
-                    nlTLenW = pageW - (nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2)),
-                    nlTLenH = pageH - (pageH - (nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)));
-                if((nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)) < (pageH / 2)) { console.log("mobile"); nlTLenH = pageH - (nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)); }
-                nlCR = (Math.round(((nlTLenW)**2 + (nlTLenH)**2)**(1/2)) / 100);
+                    nlposY = nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2);
 
                 if(nl.mouseIsOver == true) {
-                    var VHTRcPosX = (event.clientX / 100),
-                        VHTRcPosY = (event.clientY / 100);
+                    var curX = event.clientX,
+                        curY = event.clientY,
+                        VHTRcPosX = (curX / 100),
+                        VHTRcPosY = (curY / 100),
+                        nlTLenW = pageW - curX,
+                        nlTLenH = pageH - (pageH - curY);
                 } else { // for history browsing (not triggerable yet)
                     var VHTRcPosX = (Math.round(nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2)) / 100),
-                        VHTRcPosY = (Math.round(nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)) / 100);
+                        VHTRcPosY = (Math.round(nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)) / 100),
+                        nlTLenW = pageW - (nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2)),
+                        nlTLenH = pageH - (pageH - nlposY);
+                        if(nlposY < (pageH / 2)) { nlTLenH = pageH - (nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)); }
                 }
+                nlCR = (Math.round(((nlTLenW)**2 + (nlTLenH)**2)**(1/2)) / 100);
 
                 newVHTRCc.setAttribute("cx", VHTRcPosX)
                 newVHTRCc.setAttribute("cy", VHTRcPosY)
