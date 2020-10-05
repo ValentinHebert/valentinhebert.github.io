@@ -77,7 +77,7 @@ function init() {
                 var nltxt = document.querySelector(".navlink#" + nlID + " span"),
                     nlTLenW = pageW - (nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2)),
                     nlTLenH = pageH - (pageH - (nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)));
-                if(nlTLenH < (pageH / 2)) { console.log("mobile"); nlTLenH = pageH - (nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)); }
+                if((nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)) < (pageH / 2)) { console.log("mobile"); nlTLenH = pageH - (nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)); }
                 nlCR = (Math.round(((nlTLenW)**2 + (nlTLenH)**2)**(1/2)) / 100);
 
                 if(nl.mouseIsOver == true) {
