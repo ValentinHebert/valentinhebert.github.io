@@ -2,6 +2,9 @@ const swup = new Swup({
     animateHistoryBrowsing: true
 });
 
+function checkWinSize() { if(window.innerWidth > 1100) { isMobile = false } else { isMobile = true }};
+checkWinSize(); window.addEventListener("resize", checkWinSize);
+
 var vhtrpColor = {"accueil" : "#232323", "photographie" : "#f0f0f0", "video" : "#0f0f0f", "contact" : "#4B4B4B"},
     svgNS = "http://www.w3.org/2000/svg";
 
@@ -10,12 +13,14 @@ function init() {
         pathDir = ((window.location.pathname).replace(/\/[^/]*$/, '')).replace(/^\//, '');
     if(window.location.pathname == "/") { pathDir = "/"; }
 
-    if (navPos.hasChildNodes() == false) {
+    if (navPos.hasChildNodes() == false) { // NAVIGATION
         navPos.innerHTML = `
             <div>
                 <a id="accueil" class="navlink" href="/">
-                    <div id="wn-v" class="nav-name">VALENTIN</div>
-                    <div id="wn-h" class="nav-name">HÉBERT</div>
+                    <div> <!-- a -->
+                        <div id="wn-v" class="nav-name">VALENTIN</div>
+                        <div id="wn-h" class="nav-name">HÉBERT</div>
+                    </div>
                     <div class="nav-separator"></div>
                 </a>
                 <nav>
@@ -49,6 +54,9 @@ function init() {
                 </div>
             </div>
         `;
+
+        function contentMarginLeftCheck() { document.querySelector("#content-container").style.marginLeft = navPos.offsetWidth + "px"; };
+        contentMarginLeftCheck(); window.addEventListener("resize", contentMarginLeftCheck);
 
         function applyBGColor(ID) {
             document.body.style.backgroundColor = vhtrpColor[ID];
