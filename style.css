@@ -256,7 +256,7 @@ nav, #nav-social {
     z-index: 100;
     position: relative;
     width: auto;
-    height: 100%;
+    height: auto;
     padding: 5%;
 }
 main#swup {
