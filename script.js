@@ -17,7 +17,7 @@ function init() {
         navPos.innerHTML = `
             <div>
                 <a id="accueil" class="navlink" href="/">
-                    <div> <!-- a -->
+                    <div>
                         <div id="wn-v" class="nav-name">VALENTIN</div>
                         <div id="wn-h" class="nav-name">HÉBERT</div>
                     </div>
@@ -27,19 +27,43 @@ function init() {
                     <a id="photographie" class="navlink navlink-p" href="/photographie/">
                         <div>
                             <div class="nav-sel"></div>
-                            <span>PHOTOGRAPHIE</span>
+                            <div class="navbtns-content">
+                                <svg class="navicons" viewBox="0 0 32 32">
+                                    <g>
+                                        <path d="M28,32H4l-4-4V4l4-4h24l4,4v24L28,32z M8.3,27.7h15.5l4-4V8.3l-4-4H8.3l-4,4v15.5L8.3,27.7z"/>
+                                        <polyline style="fill:none;stroke-width:5;stroke-linejoin:bevel;stroke-miterlimit:10;" points="5,27.7 16,16 29.8,21.1"/>
+                                    </g>
+                                </svg>
+                                <span>PHOTOGRAPHIE</span>
+                            </div>
                         </div>
                     </a>
                     <a id="video" class="navlink navlink-p" href="/video/">
                         <div>
                             <div class="nav-sel"></div>
-                            <span>VIDÉO</span>
+                            <div class="navbtns-content">
+                                <svg class="navicons" viewBox="0 0 32 32">
+                                <g>
+                                    <path d="M28,32H4l-4-4V4l4-4h24l4,4v24L28,32z M8.3,27.7h15.5l4-4V8.3l-4-4H8.3l-4,4v15.5L8.3,27.7z"/>
+                                    <polyline style="fill:none;stroke-width:5;stroke-linejoin:bevel;stroke-miterlimit:10;" points="5,27.7 16,16 29.8,21.1"/>
+                                </g>
+                                </svg>
+                                <span>VIDÉO</span>
+                            </div>
                         </div>
                     </a>
                     <a id="contact" class="navlink navlink-p" href="/contact/">
                         <div>
                             <div class="nav-sel"></div>
-                            <span>CONTACT</span>
+                            <div class="navbtns-content">
+                                <svg class="navicons" viewBox="0 0 32 32">
+                                <g>
+                                    <path d="M28,32H4l-4-4V4l4-4h24l4,4v24L28,32z M8.3,27.7h15.5l4-4V8.3l-4-4H8.3l-4,4v15.5L8.3,27.7z"/>
+                                    <polyline style="fill:none;stroke-width:5;stroke-linejoin:bevel;stroke-miterlimit:10;" points="5,27.7 16,16 29.8,21.1"/>
+                                </g>
+                                </svg>
+                                <span>CONTACT</span>
+                            </div>
                         </div>
                     </a>
                 </nav>
@@ -58,12 +82,23 @@ function init() {
         function contentMarginLeftCheck() { document.querySelector("#content-container").style.marginLeft = navPos.offsetWidth + "px"; };
         contentMarginLeftCheck(); window.addEventListener("resize", contentMarginLeftCheck);
 
+
         function applyBGColor(ID) {
             document.body.style.backgroundColor = vhtrpColor[ID];
             document.querySelector("#container").style.backgroundColor = vhtrpColor[ID];
         }
         function applyPageTheme(ID) {
-            if(ID == "accueil" || ID == "/") { toAccueil = true; } else { toAccueil = false; }
+            function navCurrentStyle(nlID) {
+                var nl = document.querySelector(".navlink#" + nlID);
+                if(nl.classList.contains("navlink-p")) { // NORMAL
+                    document.querySelector(".navlink-p#" + nlID + " .navbtns-content svg.navicons g").classList.add("nl-navicon-current");
+                    document.querySelector(".navlink-p#" + nlID + " .nav-sel").classList.add("nlsel-current");
+                    nl.classList.add("nl-current");
+                } else { // ACCUEIL
+                    document.querySelector(".navlink#" + nlID + " .nav-separator").classList.add("nl-current");
+                }
+            }
+            if(ID == "accueil" || ID == "/") { toAccueil = true; } else { toAccueil = false; navCurrentStyle(ID); }
             if(ID == "photographie") { document.documentElement.classList.add("photographie");
             } else {
                 document.documentElement.classList.remove("photographie");
@@ -80,18 +115,13 @@ function init() {
             nl.addEventListener("click", function(event) {
                 var pageW = document.documentElement.clientWidth,
                     pageH = document.documentElement.clientHeight,
-                    nlID = nl.id;
+                    nlID = nl.id,
+                    nlNotPath = ".navlink-p:not(#" + nlID + ")";
 
                 applyPageTheme(nlID);
-
-                document.querySelectorAll(".navlink-p:not(#" + nl.id + ") .nav-sel").forEach(function (nsel) { nsel.classList.remove("nlsel-current"); });
-                document.querySelectorAll(".navlink-p:not(#" + nl.id + ")").forEach(function (nsel) { nsel.classList.remove("nl-current"); });
-                if(nl.classList.contains("navlink-p")) { // NORMAL
-                    document.querySelector(".navlink-p#" + nl.id + " .nav-sel").classList.add("nlsel-current");
-                    nl.classList.add("nl-current");
-                } else { // ACCUEIL
-                    document.querySelector(".navlink#" + nl.id + " .nav-separator").classList.add("nl-current");
-                }
+                document.querySelectorAll(nlNotPath + " .navbtns-content svg.navicons g").forEach(function (ni) { ni.classList.remove("nl-navicon-current"); });
+                document.querySelectorAll(nlNotPath + " .nav-sel").forEach(function (nsel) { nsel.classList.remove("nlsel-current"); });
+                document.querySelectorAll(nlNotPath).forEach(function (n) { n.classList.remove("nl-current"); });
 
                 // VHTRP
                 var newVHTRC = document.createElementNS(svgNS, "svg"),
@@ -106,7 +136,6 @@ function init() {
                 if(nl.classList.contains("navlink-p")) {
                     nltxt = document.querySelector(".navlink#" + nlID + " span");
                 }
-                var nlposY = nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2);
 
                 if(nl.mouseIsOver == true) {
                     var curX = event.clientX,
@@ -115,13 +144,15 @@ function init() {
                         VHTRcPosY = (curY / 100),
                         nlTLenW = pageW - curX,
                         nlTLenH = pageH - (pageH - curY);
-                        if(nlposY < (pageH / 2)) { nlTLenH = pageH - curY; }
+                    if(curX > (pageW / 2)) { nlTLenW = pageW - (pageW - curX); }
+                    if(curY < (pageH / 2)) { nlTLenH = pageH - curY; }
                 } else { // for history browsing (not triggerable yet)
-                    var VHTRcPosX = (Math.round(nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2)) / 100),
+                    var nlposY = nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2),
+                        VHTRcPosX = (Math.round(nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2)) / 100),
                         VHTRcPosY = (Math.round(nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)) / 100),
                         nlTLenW = pageW - (nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2)),
                         nlTLenH = pageH - (pageH - nlposY);
-                        if(nlposY < (pageH / 2)) { nlTLenH = pageH - (nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)); }
+                    if(nlposY < (pageH / 2)) { nlTLenH = pageH - (nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)); }
                 }
                 nlCR = (Math.round(((nlTLenW)**2 + (nlTLenH)**2)**(1/2)) / 100) + 0.1;
 

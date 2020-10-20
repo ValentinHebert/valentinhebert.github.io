@@ -34,8 +34,8 @@ body {
 }
 html.is-animating .transition-vh {
     opacity: 0;
+    transition: 0.9s;
 }
-
 
 #vhtrp {
     z-index: 1000;
@@ -48,7 +48,7 @@ html.is-animating .transition-vh {
     overflow: hidden;
 }
 .vhtrp-circle {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     stroke: transparent;
@@ -67,12 +67,9 @@ html.is-animating .transition-vh {
 #nav-pos {
     z-index: 1100;
     display: flex;
-    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
-    padding-left: 5%;
     text-align: left;
     color: var(--accenttxt);
     transition: color var(--VHTRP-txttr);
@@ -124,9 +121,6 @@ nav, #nav-social {
 }
 .navlink-p > div {
     display: block;
-    /*display: flex;
-    flex-direction: column;
-    align-items: center;*/
     position: relative;
     width: max-content;
     padding-bottom: 3px;
@@ -142,7 +136,7 @@ nav, #nav-social {
                 height 0.2s cubic-bezier(0.8, 0.8, 0, 1);
     will-change: width, height, background-color;
 }
-.navlink-p > div > span {
+.navlink-p > div span {
     position: relative;
     color: var(--accenttxt);
     transition: color var(--VHTRP-txttr);
@@ -168,12 +162,42 @@ nav, #nav-social {
 .nl-current {
     letter-spacing: 1.5px !important;
     transition: color var(--VHTRP-txttr),
-                0.3s cubic-bezier(0.2, 0.5, 0, 1) !important;
+                0.3s cubic-bezier(0.2, 0.5, 0, 1),
+                font-size 0s !important;
 }
 .nlsel-current {
     width: 100% !important;
 }
 
+/*nav icons*/
+.navbtns-content svg.navicons {
+    height: clamp(15px, 2.15vw, 21px);
+    position: relative;
+    margin: 2px 6.5px 2px 0px;
+    fill: var(--accenttxt);
+    stroke: var(--accenttxt);
+    overflow: visible;
+    transition: fill var(--VHTRP-txttr),
+                stroke var(--VHTRP-txttr);
+}
+.navbtns-content svg.navicons g {
+    transform: scale(0.925);
+    transform-origin: center;
+    transition: transform 0.5s cubic-bezier(0.3, 0.6, 0, 1);
+}
+.navlink:hover .navbtns-content svg.navicons g,
+.navlink:active .navbtns-content svg.navicons g,
+.nl-navicon-current {
+    transform: scale(1) !important;
+    transition: transform 0.3s cubic-bezier(0.3, 0.7, 0, 1);
+}
+
+.navbtns-content {
+    display: flex;
+    align-items: center;
+}
+
+/* nav social */
 #ws-ig {
     display: block;
     width: 32px;
@@ -207,10 +231,61 @@ nav, #nav-social {
     position: relative;
     width: auto;
     height: 100%;
-    padding-left: 5%;
+    padding: 5%;
 }
 main#swup {
     position: relative;
     width: 100%;
     height: 100%;
+}
+
+
+@media (min-width: 728px) /* PC */ {
+    #nav-pos {
+        align-items: center;
+        width: auto;
+        height: 100%;
+        padding-left: 5%;
+    }
+    .navbtns-content svg.navicons {
+        display: none;
+    }
+}
+
+@media (max-width: 727px) /* MOBILE */ {
+    nav {
+        display: flex;
+        justify-content: center;
+    }
+    #nav-pos {
+        justify-content: center;
+        width: 100%;
+        height: auto;
+        padding: 5% 0;
+    }
+    
+    .navlink {
+        text-align: center;
+    }
+    .navlink-p > div {
+        display: flex;
+        justify-content: center;
+    }
+    .navlink-p > div span {
+        display: none;
+    }
+
+    .nl-current {
+        width: auto;
+    }
+
+    .navbtns-content svg.navicons {
+        height: clamp(30px, 8.5vw, 60px);
+        margin: 5px 15px;
+    }
+
+
+    #content-container {
+        margin-left: 0 !important;
+    }
 }
