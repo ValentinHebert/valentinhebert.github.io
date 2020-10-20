@@ -284,6 +284,11 @@ main#swup {
 }
 
 @media (max-width: 727px) /* MOBILE */ {
+    .navlink-p > div span,
+    .navlink-p .nav-sel,
+    #nav-social {
+        display: none;
+    }
     nav {
         display: flex;
         justify-content: center;
@@ -302,13 +307,6 @@ main#swup {
         display: flex;
         justify-content: center;
     }
-    .navlink-p > div span {
-        display: none;
-    }
-
-    .navlink-p .nav-sel {
-        display: none;
-    }
 
     .nl-current {
         width: auto;
@@ -318,7 +316,6 @@ main#swup {
         height: clamp(45px, 8.5vw, 60px);
         margin: 10px clamp(10px, 2.75vw, 25px);
     }
-
 
     #content-container {
         margin-left: 0 !important;
