@@ -36,6 +36,9 @@ html.is-animating .transition-vh {
     opacity: 0;
     transition: 0.9s;
 }
+html.is-rendering .transition-vh {
+    transition: 0.4s;
+}
 
 #vhtrp {
     z-index: 1000;
@@ -174,11 +177,9 @@ nav, #nav-social {
     height: clamp(15px, 2.15vw, 21px);
     position: relative;
     margin: 2px 6.5px 2px 0px;
-    fill: var(--accenttxt);
-    stroke: var(--accenttxt);
+    fill: transparent;
+    stroke: transparent;
     overflow: visible;
-    transition: fill var(--VHTRP-txttr),
-                stroke var(--VHTRP-txttr);
 }
 .navbtns-content svg.navicons g {
     transform: scale(0.925);
@@ -187,9 +188,34 @@ nav, #nav-social {
 }
 .navlink:hover .navbtns-content svg.navicons g,
 .navlink:active .navbtns-content svg.navicons g,
-.nl-navicon-current {
+.nli-current {
     transform: scale(1) !important;
     transition: transform 0.3s cubic-bezier(0.3, 0.7, 0, 1);
+}
+
+.navbtns-content svg.navicons .fill {
+    fill: var(--accenttxt);
+}
+.navbtns-content svg.navicons .to-fill {
+    fill: var(--accenttxt) !important;
+    stroke-width: 0;
+    opacity: 0;
+}
+.nli-current-fill {
+    opacity: 1 !important;
+}
+.navbtns-content svg.navicons .stroke {
+    stroke: var(--accenttxt);
+}
+.stroke.nli-current-trnsprnt {
+    stroke: var(--bgpage) !important;
+}
+.fill.nli-current-trnsprnt {
+    fill: var(--bgpage) !important;
+}
+.navbtns-content svg.navicons g * {
+    transition: var(--VHTRP-txttr);
+    will-change: fill, stroke, opacity;
 }
 
 .navbtns-content {
@@ -250,6 +276,11 @@ main#swup {
     .navbtns-content svg.navicons {
         display: none;
     }
+
+
+    #content-container {
+        margin-top: 0 !important;
+    }
 }
 
 @media (max-width: 727px) /* MOBILE */ {
@@ -275,13 +306,17 @@ main#swup {
         display: none;
     }
 
+    .navlink-p .nav-sel {
+        display: none;
+    }
+
     .nl-current {
         width: auto;
     }
 
     .navbtns-content svg.navicons {
-        height: clamp(30px, 8.5vw, 60px);
-        margin: 5px 15px;
+        height: clamp(45px, 8.5vw, 60px);
+        margin: 10px clamp(10px, 2.75vw, 25px);
     }
 
 

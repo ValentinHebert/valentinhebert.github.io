@@ -2,16 +2,28 @@ const swup = new Swup({
     animateHistoryBrowsing: true
 });
 
-function checkWinSize() { if(window.innerWidth > 1100) { isMobile = false } else { isMobile = true }};
+var doc = document.documentElement,
+    isMobile = undefined,
+    svgNS = "http://www.w3.org/2000/svg",
+    vhtrpColor = {"accueil" : "#232323", "photographie" : "#f0f0f0", "video" : "#0f0f0f", "contact" : "#4B4B4B"};
+
+
+function checkWinSize() { if(window.innerWidth > 727) { isMobile = false } else { isMobile = true }};
 checkWinSize(); window.addEventListener("resize", checkWinSize);
 
-var vhtrpColor = {"accueil" : "#232323", "photographie" : "#f0f0f0", "video" : "#0f0f0f", "contact" : "#4B4B4B"},
-    svgNS = "http://www.w3.org/2000/svg";
+function addClassAll(path, c) {
+    var elems = document.querySelectorAll(path);
+    if(elems) { elems.forEach(function (el) { el.classList.add(c); }); }
+}
+function removeClassAll(path, c) {
+    var elems = document.querySelectorAll(path);
+    if(elems) { elems.forEach(function (el) { el.classList.remove(c); }); }
+}
 
 function init() {
     var navPos = document.querySelector("#nav-pos"),
         pathDir = ((window.location.pathname).replace(/\/[^/]*$/, '')).replace(/^\//, '');
-    if(window.location.pathname == "/") { pathDir = "/"; }
+    if(window.location.pathname == "/") { pathDir = "accueil"; }
 
     if (navPos.hasChildNodes() == false) { // NAVIGATION
         navPos.innerHTML = `
@@ -30,8 +42,12 @@ function init() {
                             <div class="navbtns-content">
                                 <svg class="navicons" viewBox="0 0 32 32">
                                     <g>
-                                        <path d="M28,32H4l-4-4V4l4-4h24l4,4v24L28,32z M8.3,27.7h15.5l4-4V8.3l-4-4H8.3l-4,4v15.5L8.3,27.7z"/>
-                                        <polyline style="fill:none;stroke-width:5;stroke-linejoin:bevel;stroke-miterlimit:10;" points="5,27.7 16,16 29.8,21.1"/>
+                                        <circle class="to-fill" cx="10.3" cy="10.1" r="4.2"/>
+                                        <circle class="stroke" stroke-width="2.5" cx="10.3" cy="10.1" r="4.2"/>
+                                        <polygon class="to-fill" points="29.1,29.1 16,16 2.9,29.1"/>
+                                        <polyline class="stroke" stroke-width="3" stroke-linejoin="bevel" points="2.9,29.1 16,16 29.1,29.1"/>
+
+                                        <path class="fill" d="M28,32H4l-4-4V4l4-4h24l4,4v24L28,32z M6.1,29.1l19.7,0l3.3-3.3l0-19.7l-3.3-3.3l-19.7,0L2.9,6.1l0,19.7L6.1,29.1z"/>
                                     </g>
                                 </svg>
                                 <span>PHOTOGRAPHIE</span>
@@ -44,8 +60,10 @@ function init() {
                             <div class="navbtns-content">
                                 <svg class="navicons" viewBox="0 0 32 32">
                                 <g>
-                                    <path d="M28,32H4l-4-4V4l4-4h24l4,4v24L28,32z M8.3,27.7h15.5l4-4V8.3l-4-4H8.3l-4,4v15.5L8.3,27.7z"/>
-                                    <polyline style="fill:none;stroke-width:5;stroke-linejoin:bevel;stroke-miterlimit:10;" points="5,27.7 16,16 29.8,21.1"/>
+                                    <polygon class="to-fill" points="25.2,16 8.7,6.5 8.7,25.5"/>
+                                    <polygon class="stroke" stroke-width="3" stroke-linejoin="bevel" points="25.2,16 8.7,6.5 8.7,25.5"/>
+
+                                    <path class="fill" d="M28,32H4l-4-4V4l4-4h24l4,4v24L28,32z M6.1,29.1l19.7,0l3.3-3.3l0-19.7l-3.3-3.3l-19.7,0L2.9,6.1l0,19.7L6.1,29.1z"/>
                                 </g>
                                 </svg>
                                 <span>VIDÉO</span>
@@ -58,8 +76,11 @@ function init() {
                             <div class="navbtns-content">
                                 <svg class="navicons" viewBox="0 0 32 32">
                                 <g>
-                                    <path d="M28,32H4l-4-4V4l4-4h24l4,4v24L28,32z M8.3,27.7h15.5l4-4V8.3l-4-4H8.3l-4,4v15.5L8.3,27.7z"/>
-                                    <polyline style="fill:none;stroke-width:5;stroke-linejoin:bevel;stroke-miterlimit:10;" points="5,27.7 16,16 29.8,21.1"/>
+                                    <rect class="to-fill" x="6.7" y="9" width="18.6" height="14.1"/>
+                                    <polyline class="stroke to-trnsprnt" stroke-width="2.5" stroke-linejoin="bevel" points="6.7,10 16,16 25.3,10"/>
+                                    <rect class="stroke" stroke-width="2.5" x="6.7" y="9" width="18.6" height="14.1"/>
+
+                                    <path class="fill" d="M28,32H4l-4-4V4l4-4h24l4,4v24L28,32z M6.1,29.1l19.7,0l3.3-3.3l0-19.7l-3.3-3.3l-19.7,0L2.9,6.1l0,19.7L6.1,29.1z"/>
                                 </g>
                                 </svg>
                                 <span>CONTACT</span>
@@ -79,7 +100,13 @@ function init() {
             </div>
         `;
 
-        function contentMarginLeftCheck() { document.querySelector("#content-container").style.marginLeft = navPos.offsetWidth + "px"; };
+        function contentMarginLeftCheck() {
+            if(isMobile == false) {
+                document.querySelector("#content-container").style.marginLeft = navPos.offsetWidth + "px";
+            } else {
+                document.querySelector("#content-container").style.marginTop = navPos.offsetHeight + "px";
+            }
+        };
         contentMarginLeftCheck(); window.addEventListener("resize", contentMarginLeftCheck);
 
 
@@ -89,16 +116,23 @@ function init() {
         }
         function applyPageTheme(ID) {
             function navCurrentStyle(nlID) {
-                var nl = document.querySelector(".navlink#" + nlID);
+                var nl = document.querySelector(".navlink#" + nlID),
+                    nlPath = ".navlink#" + nlID,
+                    nlpPath = ".navlink-p#" + nlID,
+                    nliPath = nlpPath + " .navbtns-content svg.navicons";
+
                 if(nl.classList.contains("navlink-p")) { // NORMAL
-                    document.querySelector(".navlink-p#" + nlID + " .navbtns-content svg.navicons g").classList.add("nl-navicon-current");
-                    document.querySelector(".navlink-p#" + nlID + " .nav-sel").classList.add("nlsel-current");
+                    document.querySelector(nlpPath + " .nav-sel").classList.add("nlsel-current");
                     nl.classList.add("nl-current");
+
+                    addClassAll(nliPath + " .to-fill", "nli-current-fill");
+                    addClassAll(nliPath + " .stroke.to-trnsprnt", "nli-current-trnsprnt");
+                    document.querySelector(nliPath + " g").classList.add("nli-current");
                 } else { // ACCUEIL
-                    document.querySelector(".navlink#" + nlID + " .nav-separator").classList.add("nl-current");
+                    document.querySelector(nlPath + " .nav-separator").classList.add("nl-current");
                 }
             }
-            if(ID == "accueil" || ID == "/") { toAccueil = true; } else { toAccueil = false; navCurrentStyle(ID); }
+            if(ID == "accueil") { toAccueil = true; } else { toAccueil = false; navCurrentStyle(ID); }
             if(ID == "photographie") { document.documentElement.classList.add("photographie");
             } else {
                 document.documentElement.classList.remove("photographie");
@@ -106,6 +140,7 @@ function init() {
         }
         applyBGColor(pathDir);
         applyPageTheme(pathDir);
+        doc.style.setProperty('--bgpage', vhtrpColor[pathDir]);
 
         document.querySelectorAll(".navlink").forEach(function (nl) {
             nl.mouseIsOver = false;
@@ -116,12 +151,17 @@ function init() {
                 var pageW = document.documentElement.clientWidth,
                     pageH = document.documentElement.clientHeight,
                     nlID = nl.id,
-                    nlNotPath = ".navlink-p:not(#" + nlID + ")";
+                    nlNotPath = ".navlink-p:not(#" + nlID + ")",
+                    nliNotPath = nlNotPath + " .navbtns-content svg.navicons";
 
                 applyPageTheme(nlID);
-                document.querySelectorAll(nlNotPath + " .navbtns-content svg.navicons g").forEach(function (ni) { ni.classList.remove("nl-navicon-current"); });
-                document.querySelectorAll(nlNotPath + " .nav-sel").forEach(function (nsel) { nsel.classList.remove("nlsel-current"); });
-                document.querySelectorAll(nlNotPath).forEach(function (n) { n.classList.remove("nl-current"); });
+                doc.style.setProperty('--bgpage', vhtrpColor[nlID]);
+
+                removeClassAll(nlNotPath, "nl-current");
+                removeClassAll(nlNotPath + " .nav-sel", "nlsel-current");
+                removeClassAll(nliNotPath + " g", "nli-current");
+                removeClassAll(nliNotPath + " .to-fill", "nli-current-fill");
+                removeClassAll(nliNotPath + " .stroke.to-trnsprnt", "nli-current-trnsprnt");
 
                 // VHTRP
                 var newVHTRC = document.createElementNS(svgNS, "svg"),
