@@ -301,7 +301,7 @@ main#swup {
         width: 100%;
         height: auto;
         padding-top: 7.5%;
-        box-shadow: 0 -17px 25px var(--accent-prim);
+        /*box-shadow: 0 -17px 25px var(--accent-prim);*/
     }
     
     .navlink {
