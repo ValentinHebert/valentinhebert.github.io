@@ -1,5 +1,9 @@
 const swup = new Swup({
-    animateHistoryBrowsing: true
+    animateHistoryBrowsing: true,
+    plugins: [new SwupScrollPlugin({
+        scrollFriction: 0.8,
+        scrollAcceleration: 0.7,
+    })]
 });
 
 var doc = document.documentElement,
@@ -166,9 +170,10 @@ function init() {
                 removeClassAll(nliNotPath + " .stroke.to-trnsprnt", "nli-current-trnsprnt");
 
                 // MOBILE
-                navPos.style.backgroundColor = null;
-                
-
+                if(isMobile == true) {
+                    navPos.style.backgroundColor = null;
+                    swup.scrollTo(document.body, 0);
+                }
 
                 // VHTRP
                 var newVHTRC = document.createElementNS(svgNS, "svg"),
@@ -250,6 +255,7 @@ function init() {
             }
         }
         mobileTopNav(); window.addEventListener("scroll", mobileTopNav);
+
     }
 }
 init();
