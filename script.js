@@ -2,7 +2,7 @@ const swup = new Swup({
     animateHistoryBrowsing: true,
     plugins: [new SwupScrollPlugin({
         scrollFriction: 0.8,
-        scrollAcceleration: 0.7,
+        scrollAcceleration: 0.65,
     })]
 });
 
@@ -25,9 +25,14 @@ function removeClassAll(path, c) {
 }
 
 function init() {
-    var navPos = document.querySelector("#nav-pos"),
+    var navPos = document.querySelector("#nav-pos");
+
+    function getPageID() {
         pathDir = ((window.location.pathname).replace(/\/[^/]*$/, '')).replace(/^\//, '');
-    if(window.location.pathname == "/") { pathDir = "accueil"; }
+        if(window.location.pathname == "/") { pathDir = "accueil"; }
+        return pathDir;
+    }
+    getPageID();
 
     if (navPos.hasChildNodes() == false) { // NAVIGATION
         navPos.innerHTML = `
@@ -148,47 +153,41 @@ function init() {
         applyPageTheme(pathDir);
         doc.style.setProperty('--bgpage', vhtrpColor[pathDir]);
 
-        document.querySelectorAll(".navlink").forEach(function(nl) {
-            nl.mouseIsOver = false;
-            nl.onmouseover = function() { this.mouseIsOver = true; };
-            nl.onmouseout = function() { this.mouseIsOver = false; };
+        function pagetrBull(event, histbr, nl) {
+            if(histbr == true) { event = getPageID(); console.log(event); }
+            if(nl == null) { nl = document.querySelector(".navlink#" + event); }
 
-            nl.addEventListener("click", function(event) {
-                var pageW = document.documentElement.clientWidth,
-                    pageH = document.documentElement.clientHeight,
-                    nlID = nl.id,
-                    nlNotPath = ".navlink-p:not(#" + nlID + ")",
-                    nliNotPath = nlNotPath + " .navbtns-content svg.navicons";
+            var pageW = document.documentElement.clientWidth,
+                pageH = document.documentElement.clientHeight,
+                nlID = nl.id,
+                nlNotPath = ".navlink-p:not(#" + nlID + ")",
+                nliNotPath = nlNotPath + " .navbtns-content svg.navicons";
 
-                applyPageTheme(nlID);
-                doc.style.setProperty('--bgpage', vhtrpColor[nlID]);
+            applyPageTheme(nlID);
+            doc.style.setProperty('--bgpage', vhtrpColor[nlID]);
 
-                removeClassAll(nlNotPath, "nl-current");
-                removeClassAll(nlNotPath + " .nav-sel", "nlsel-current");
-                removeClassAll(nliNotPath + " g", "nli-current");
-                removeClassAll(nliNotPath + " .to-fill", "nli-current-fill");
-                removeClassAll(nliNotPath + " .stroke.to-trnsprnt", "nli-current-trnsprnt");
+            removeClassAll(nlNotPath, "nl-current");
+            removeClassAll(nlNotPath + " .nav-sel", "nlsel-current");
+            removeClassAll(nliNotPath + " g", "nli-current");
+            removeClassAll(nliNotPath + " .to-fill", "nli-current-fill");
+            removeClassAll(nliNotPath + " .stroke.to-trnsprnt", "nli-current-trnsprnt");
 
-                // MOBILE
-                if(isMobile == true) {
-                    navPos.style.backgroundColor = null;
-                    swup.scrollTo(document.body, 0);
-                }
+            // MOBILE
+            if(isMobile == true) {
+                navPos.style.backgroundColor = null;
+                swup.scrollTo(document.body, 0);
+            }
 
-                // VHTRP
-                var newVHTRC = document.createElementNS(svgNS, "svg"),
-                    newVHTRCc = document.createElementNS(svgNS, "circle");
-                newVHTRC.classList.add("vhtrp-circle"); newVHTRC.id = nlID;
-                newVHTRC.setAttribute("viewBox", "0 0 " + (pageW / 100) + " " + (pageH / 100)); 
-                newVHTRC.style.fill = vhtrpColor[nlID];
-                newVHTRC.appendChild(newVHTRCc);
-                document.querySelector("#vhtrp").appendChild(newVHTRC);
+            // VHTRP
+            var newVHTRC = document.createElementNS(svgNS, "svg"),
+                newVHTRCc = document.createElementNS(svgNS, "circle");
+            newVHTRC.classList.add("vhtrp-circle"); newVHTRC.id = nlID;
+            newVHTRC.setAttribute("viewBox", "0 0 " + (pageW / 100) + " " + (pageH / 100)); 
+            newVHTRC.style.fill = vhtrpColor[nlID];
+            newVHTRC.appendChild(newVHTRCc);
+            document.querySelector("#vhtrp").appendChild(newVHTRC);
 
-                var nltxt = nl;
-                if(nl.classList.contains("navlink-p")) {
-                    nltxt = document.querySelector(".navlink#" + nlID + " span");
-                }
-
+            if(histbr == false) { // normal
                 if(nl.mouseIsOver == true) {
                     var curX = event.clientX,
                         curY = event.clientY,
@@ -198,34 +197,46 @@ function init() {
                         nlTLenH = pageH - (pageH - curY);
                     if(curX > (pageW / 2)) { nlTLenW = pageW - (pageW - curX); }
                     if(curY < (pageH / 2)) { nlTLenH = pageH - curY; }
-                } else { // for history browsing (not triggerable yet)
-                    var nlposY = nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2),
-                        VHTRcPosX = (Math.round(nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2)) / 100),
-                        VHTRcPosY = (Math.round(nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)) / 100),
-                        nlTLenW = pageW - (nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2)),
-                        nlTLenH = pageH - (pageH - nlposY);
-                    if(nlposY < (pageH / 2)) { nlTLenH = pageH - (nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)); }
                 }
-                nlCR = (Math.round(((nlTLenW)**2 + (nlTLenH)**2)**(1/2)) / 100) + 0.1;
+            } else { // history browsing
+                var nltxt = nl;
+                if(nl.classList.contains("navlink-p")) { nltxt = document.querySelector(".navlink#" + event + " .navbtns-content"); }
+                var nlposX = nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2),
+                    nlposY = nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2),
+                    VHTRcPosX = (Math.round(nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2)) / 100),
+                    VHTRcPosY = (Math.round(nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)) / 100),
+                    nlTLenW = pageW - (nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2)),
+                    nlTLenH = pageH - (pageH - nlposY);
+                if(nlposX > (pageW / 2)) { nlTLenW = pageW - (pageW - nlposX); }
+                if(nlposY < (pageH / 2)) { nlTLenH = pageH - (nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2)); }
+            }
+            nlCR = (Math.round(((nlTLenW)**2 + (nlTLenH)**2)**(1/2)) / 100) + 0.1;
 
-                newVHTRCc.setAttribute("cx", VHTRcPosX)
-                newVHTRCc.setAttribute("cy", VHTRcPosY)
+            newVHTRCc.setAttribute("cx", VHTRcPosX)
+            newVHTRCc.setAttribute("cy", VHTRcPosY)
+            setTimeout(function () {
+                newVHTRCc.style.transition = "r 900ms cubic-bezier(0.5, 0.7, 0, 1)";
+                newVHTRCc.setAttribute("r", nlCR)
+            }, 10);
+            setTimeout(function () {
+                if(toAccueil == true) { document.querySelector("#page-bg").classList.add("accueil");
+                } else { document.querySelector("#page-bg").classList.remove("accueil"); }
+                applyBGColor(nlID);
+                newVHTRC.style.transition = "opacity 600ms ease";
+                newVHTRC.style.opacity = "0";
                 setTimeout(function () {
-                    newVHTRCc.style.transition = "r 900ms cubic-bezier(0.5, 0.7, 0, 1)";
-                    newVHTRCc.setAttribute("r", nlCR)
-                }, 10);
-                setTimeout(function () {
-                    if(toAccueil == true) { document.querySelector("#page-bg").classList.add("accueil");
-                    } else { document.querySelector("#page-bg").classList.remove("accueil"); }
-                    applyBGColor(nlID);
-                    newVHTRC.style.transition = "opacity 600ms ease";
-                    newVHTRC.style.opacity = "0";
-                    setTimeout(function () {
-                        newVHTRC.remove();
-                    }, 600);
-                }, 900);
-            });
+                    newVHTRC.remove();
+                }, 600);
+            }, 900);
+        }
+        document.querySelectorAll(".navlink").forEach(function(nl) {
+            nl.mouseIsOver = false;
+            nl.onmouseover = function() { this.mouseIsOver = true; };
+            nl.onmouseout = function() { this.mouseIsOver = false; };
+
+            nl.addEventListener("click", function(event) { pagetrBull(event, false, nl); });
         });
+        swup.on("popState", function() { pagetrBull(null, true, null); });
         
         function mobileTopNav() {
             if(isMobile == true) {
@@ -234,8 +245,8 @@ function init() {
                     navPos.style.top = -topnavH + "px";
                     navPos.style.backgroundColor = "var(--bgpage)";
                     navIcons.forEach(function(ni) {
-                        ni.style.height = "clamp(38.5px, 8.5vw, 42.5px)";
-                        ni.style.margin = "12.5px clamp(15px, 5vw, 25px) 10px";
+                        ni.style.height = "clamp(40px, 8vw, 45px)";
+                        ni.style.margin = "12.5px clamp(15px, 5vw, 30px) 10px";
                     });
                 } else {
                     navPos.style.top = -window.scrollY + "px";
@@ -255,7 +266,6 @@ function init() {
             }
         }
         mobileTopNav(); window.addEventListener("scroll", mobileTopNav);
-
     }
 }
 init();
