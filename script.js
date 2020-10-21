@@ -42,8 +42,8 @@ function init() {
                         <div id="wn-v" class="nav-name">VALENTIN</div>
                         <div id="wn-h" class="nav-name">HÉBERT</div>
                     </div>
-                    <div class="nav-separator"></div>
                 </a>
+                <div class="nav-separator"></div>
                 <nav>
                     <a id="photographie" class="navlink navlink-p" href="/photographie/">
                         <div>
@@ -154,7 +154,7 @@ function init() {
         doc.style.setProperty('--bgpage', vhtrpColor[pathDir]);
 
         function pagetrBull(event, histbr, nl) {
-            if(histbr == true) { event = getPageID(); console.log(event); }
+            if(histbr == true) { event = getPageID(); }
             if(nl == null) { nl = document.querySelector(".navlink#" + event); }
 
             var pageW = document.documentElement.clientWidth,

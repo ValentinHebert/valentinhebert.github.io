@@ -89,6 +89,7 @@ html.is-rendering .transition-vh {
 }
 
 .navlink#accueil {
+    display: block;
     letter-spacing: 1px;
     text-decoration: none;
     color: var(--accenttxt);
