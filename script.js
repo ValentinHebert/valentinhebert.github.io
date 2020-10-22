@@ -2,7 +2,7 @@ const swup = new Swup({
     animateHistoryBrowsing: true,
     plugins: [new SwupScrollPlugin({
         scrollFriction: 0.8,
-        scrollAcceleration: 0.65,
+        scrollAcceleration: 0.6,
     })]
 });
 
@@ -112,6 +112,7 @@ function init() {
         `;
 
         navIcons = document.querySelectorAll(".navlink .navbtns-content svg.navicons"),
+        nav = document.querySelector("nav"),
         navAC = document.querySelector("#navaccueil-content"),
         navA = document.querySelector(".navlink#accueil"),
         navASep = document.querySelector(".nav-separator");
@@ -178,10 +179,7 @@ function init() {
             removeClassAll(nliNotPath + " .stroke.to-trnsprnt", "nli-current-trnsprnt");
 
             // MOBILE
-            if(isMobile == true) {
-                navPos.style.backgroundColor = null;
-                swup.scrollTo(document.body, 0);
-            }
+            if(isMobile == true) { swup.scrollTo(document.body, 0); }
 
             // VHTRP
             var newVHTRC = document.createElementNS(svgNS, "svg"),
@@ -249,7 +247,6 @@ function init() {
             navAC.style.opacity = null;
         }
         function mobileTopNavN_reset() {
-            navPos.style.backgroundColor = null;
             navIcons.forEach(function(ni) {
                 ni.style.height = null;
                 ni.style.margin = null;
@@ -257,24 +254,24 @@ function init() {
         }
         function mobileTopNav() {
             if(isMobile == true) {
-                var topnavH = navPos.offsetHeight - document.querySelector("nav").offsetHeight;
-                if(window.scrollY > topnavH) {
+                var topnavH = navPos.offsetHeight - nav.offsetHeight;
+                if(window.scrollY > topnavH) { // MOBILE free
                     navPos.style.top = -topnavH + "px";
-                    navPos.style.backgroundColor = "var(--bgpage)";
                     navIcons.forEach(function(ni) {
                         ni.style.height = "clamp(40px, 8vw, 45px)";
                         ni.style.margin = "12.5px clamp(15px, 5vw, 30px) 10px";
                     });
                     mobileTopNavA_reset();
-                } else {
+                    document.querySelector("#nav-layerbg").style.height = nav.offsetHeight + "px";
+                } else { // MOBILE lock
                     var scrollPercent = window.scrollY / topnavH;
                     navA.style.transform = "translateY(-" + (scrollPercent / 0.275) + "vw)";
                     navASep.style.transform = "translateY(-" + (scrollPercent / 0.75) + "vw)";
-                    navAC.style.opacity = 1.2 - scrollPercent;
+                    navAC.style.opacity = 1.2 - (scrollPercent * 1.2);
                     navPos.style.top = -window.scrollY + "px";
                     mobileTopNavN_reset();
                 }
-            } else {
+            } else { // PC
                 navA.style.transform = null;
                 navPos.style.top = null;
                 mobileTopNavA_reset();
