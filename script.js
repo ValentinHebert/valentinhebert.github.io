@@ -37,13 +37,15 @@ function init() {
     if (navPos.hasChildNodes() == false) { // NAVIGATION
         navPos.innerHTML = `
             <div>
-                <a id="accueil" class="navlink" href="/">
-                    <div>
-                        <div id="wn-v" class="nav-name">VALENTIN</div>
-                        <div id="wn-h" class="nav-name">HÉBERT</div>
-                    </div>
-                </a>
-                <div class="nav-separator"></div>
+                <div id="navaccueil-content">
+                    <a id="accueil" class="navlink" href="/">
+                        <div>
+                            <div id="wn-v" class="nav-name">VALENTIN</div>
+                            <div id="wn-h" class="nav-name">HÉBERT</div>
+                        </div>
+                    </a>
+                    <div class="nav-separator"></div>
+                </div>
                 <nav>
                     <a id="photographie" class="navlink navlink-p" href="/photographie/">
                         <div>
@@ -109,7 +111,10 @@ function init() {
             </div>
         `;
 
-        navIcons = document.querySelectorAll(".navlink .navbtns-content svg.navicons");
+        navIcons = document.querySelectorAll(".navlink .navbtns-content svg.navicons"),
+        navAC = document.querySelector("#navaccueil-content"),
+        navA = document.querySelector(".navlink#accueil"),
+        navASep = document.querySelector(".nav-separator");
 
         function contentMarginLeftCheck() {
             if(isMobile == false) {
@@ -238,6 +243,18 @@ function init() {
         });
         swup.on("popState", function() { pagetrBull(null, true, null); });
         
+        function mobileTopNavA_reset() {
+            navA.style.transform = null;
+            navASep.style.transform = null;
+            navAC.style.opacity = null;
+        }
+        function mobileTopNavN_reset() {
+            navPos.style.backgroundColor = null;
+            navIcons.forEach(function(ni) {
+                ni.style.height = null;
+                ni.style.margin = null;
+            });
+        }
         function mobileTopNav() {
             if(isMobile == true) {
                 var topnavH = navPos.offsetHeight - document.querySelector("nav").offsetHeight;
@@ -248,21 +265,20 @@ function init() {
                         ni.style.height = "clamp(40px, 8vw, 45px)";
                         ni.style.margin = "12.5px clamp(15px, 5vw, 30px) 10px";
                     });
+                    mobileTopNavA_reset();
                 } else {
+                    var scrollPercent = window.scrollY / topnavH;
+                    navA.style.transform = "translateY(-" + (scrollPercent / 0.275) + "vw)";
+                    navASep.style.transform = "translateY(-" + (scrollPercent / 0.75) + "vw)";
+                    navAC.style.opacity = 1.2 - scrollPercent;
                     navPos.style.top = -window.scrollY + "px";
-                    navPos.style.backgroundColor = null;
-                    navIcons.forEach(function(ni) {
-                        ni.style.height = null;
-                        ni.style.margin = null;
-                    });
+                    mobileTopNavN_reset();
                 }
             } else {
+                navA.style.transform = null;
                 navPos.style.top = null;
-                navPos.style.backgroundColor = null;
-                navIcons.forEach(function(ni) {
-                    ni.style.height = null;
-                    ni.style.margin = null;
-                });
+                mobileTopNavA_reset();
+                mobileTopNavN_reset();
             }
         }
         mobileTopNav(); window.addEventListener("scroll", mobileTopNav);

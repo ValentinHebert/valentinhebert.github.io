@@ -304,6 +304,11 @@ main#swup {
         padding-top: 7.5%;
         /*box-shadow: 0 -17px 25px var(--accent-prim);*/
     }
+
+    .nav-separator {
+        height: 3.5px;
+        margin: 12.5px 0 10px;
+    }
     
     .navlink {
         text-align: center;
