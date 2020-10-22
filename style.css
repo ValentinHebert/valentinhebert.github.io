@@ -59,6 +59,9 @@ html.is-rendering .transition-vh {
 
 
 /*-/ NAVIGATION MENU /-*/
+#page-bg.accueil ~ #nav-layerbg {
+    display: none;
+}
 #container {
     display: table;
     position: absolute;
