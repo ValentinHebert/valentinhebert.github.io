@@ -9,7 +9,7 @@ const swup = new Swup({
 var doc = document.documentElement,
     isMobile = undefined,
     svgNS = "http://www.w3.org/2000/svg",
-    vhtrpColor = {"accueil" : "#232323", "photographie" : "#f0f0f0", "video" : "#0f0f0f", "contact" : "#4B4B4B"};
+    vhtrpColor = {"accueil" : "#4B4B4B", "photographie" : "#f0f0f0", "video" : "#0f0f0f", "contact" : "#212121"};
 
 
 function checkWinSize() { if(window.innerWidth > 727) { isMobile = false } else { isMobile = true }};
@@ -144,6 +144,11 @@ function init() {
         contentMarginLeftCheck(); window.addEventListener("resize", contentMarginLeftCheck);
 
         function applyBGColor(ID) {
+            function pageBGClass(ID) {
+                document.querySelector("#page-bg").className = "";
+                document.querySelector("#page-bg").classList.add(ID);
+            }
+            pageBGClass(ID);
             document.body.style.backgroundColor = vhtrpColor[ID];
             document.querySelector("#container").style.backgroundColor = vhtrpColor[ID];
         }
@@ -240,8 +245,6 @@ function init() {
                 newVHTRCc.setAttribute("r", nlCR)
             }, 10);
             setTimeout(function () {
-                if(toAccueil == true) { document.querySelector("#page-bg").classList.add("accueil");
-                } else { document.querySelector("#page-bg").classList.remove("accueil"); }
                 applyBGColor(nlID);
                 newVHTRC.style.transition = "opacity 600ms ease";
                 newVHTRC.style.opacity = "0";

@@ -137,7 +137,7 @@ nav, #nav-social {
     width: 0;
     height: 3px;
     background-color: var(--accenttxt);
-    transition: 0.6s cubic-bezier(0.6, 0.4, 0, 1),
+    transition: 0.6s cubic-bezier(0.6, 0.4, 0, 1.1),
                 background-color var(--VHTRP-txttr),
                 height 0.2s cubic-bezier(0.8, 0.8, 0, 1);
     will-change: width, height, background-color;
@@ -326,22 +326,26 @@ nav, #nav-social {
     transition: fill var(--VHTRP-txttr);
 }
 
+
 /*-/ BG /-*/
 #page-bg {
     z-index: 0;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    opacity: 1;
     animation: opacity-FadeIn 0.9s ease backwards;
-}
-#page-bg.accueil {
-    background-image: url("/src/accueil/accueil-bg.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 1;
+}
+#page-bg.accueil {
+    background-image: url("/src/accueil/accueil-bg.jpg");
+}
+#page-bg.contact {
+    background-image: url("/src/contact/contact-bg.jpg");
 }
 
 
