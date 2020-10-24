@@ -51,16 +51,24 @@ function init() {
                         <div>
                             <div class="nav-sel"></div>
                             <div class="navbtns-content">
-                                <svg class="navicons" viewBox="0 0 32 32">
-                                    <g>
-                                        <circle class="to-fill" cx="10.3" cy="10.1" r="4.2"/>
-                                        <circle class="stroke" stroke-width="2.5" cx="10.3" cy="10.1" r="4.2"/>
-                                        <polygon class="to-fill" points="29.1,29.1 16,16 2.9,29.1"/>
-                                        <polyline class="stroke" stroke-width="3" stroke-linejoin="bevel" points="2.9,29.1 16,16 29.1,29.1"/>
+                                <div class="icon-container">
+                                    <svg class="navicons" viewBox="0 0 32 32">
+                                        <g>
+                                            <g id="sun">
+                                                <g>
+                                                    <circle class="stroke" stroke-width="2.5" cx="10.7" cy="10.6" r="4.2"/>
+                                                    <circle class="fill stroke" stroke-width="2.5" cx="25.6" cy="57" r="4.2"/>
+                                                </g>
+                                            </g>
+                                            <g id="mountain">
+                                                <polyline class="to-fill" points="8.3,29.5 19.1,18.8 29.8,29.5 8.3,29.5"/>
+                                            </g>
+                                            <polygon class="fill" points="7.1,31.7 4.6,29.2 17.8,16 20.3,16 30.6,26.3 28.1,28.7 19.1,19.7"/>
 
-                                        <path class="fill" d="M28,32H4l-4-4V4l4-4h24l4,4v24L28,32z M6.1,29.1l19.7,0l3.3-3.3l0-19.7l-3.3-3.3l-19.7,0L2.9,6.1l0,19.7L6.1,29.1z"/>
-                                    </g>
-                                </svg>
+                                            <path id="frame" class="fill" d="M26.8,3L29,5.2v21.5L26.8,29H5.2L3,26.8V5.2L5.2,3H26.8 M28,0H4C2.4,1.6,1.6,2.4,0,4v24c1.6,1.6,2.4,2.4,4,4h24c1.6-1.6,2.4-2.4,4-4V4C30.4,2.4,29.6,1.6,28,0L28,0z"/>
+                                        </g>
+                                    </svg>
+                                </div>
                                 <span>PHOTOGRAPHIE</span>
                             </div>
                         </div>
@@ -69,14 +77,18 @@ function init() {
                         <div>
                             <div class="nav-sel"></div>
                             <div class="navbtns-content">
-                                <svg class="navicons" viewBox="0 0 32 32">
-                                <g>
-                                    <polygon class="to-fill" points="25.2,16 8.7,6.5 8.7,25.5"/>
-                                    <polygon class="stroke" stroke-width="3" stroke-linejoin="bevel" points="25.2,16 8.7,6.5 8.7,25.5"/>
+                                <div class="icon-container">
+                                    <svg class="navicons" viewBox="0 0 32 32">
+                                    <g>
+                                        <g>
+                                            <polygon class="to-fill" points="9.6,8.5 9.6,23.5 22.6,16"/>
+                                        </g>
+                                        <path class="fill" d="M9.4,26.3l-2.1-1.2V6.9l2.1-1.2l15.7,9.1v2.4L9.4,26.3z M10.1,9.3v13.3L21.7,16L10.1,9.3z"/>
 
-                                    <path class="fill" d="M28,32H4l-4-4V4l4-4h24l4,4v24L28,32z M6.1,29.1l19.7,0l3.3-3.3l0-19.7l-3.3-3.3l-19.7,0L2.9,6.1l0,19.7L6.1,29.1z"/>
-                                </g>
-                                </svg>
+                                        <path id="frame" class="fill" d="M26.8,3L29,5.2v21.5L26.8,29H5.2L3,26.8V5.2L5.2,3H26.8 M28,0H4C2.4,1.6,1.6,2.4,0,4v24c1.6,1.6,2.4,2.4,4,4h24c1.6-1.6,2.4-2.4,4-4V4C30.4,2.4,29.6,1.6,28,0L28,0z"/>
+                                    </g>
+                                    </svg>
+                                </div>
                                 <span>VIDÉO</span>
                             </div>
                         </div>
@@ -85,15 +97,17 @@ function init() {
                         <div>
                             <div class="nav-sel"></div>
                             <div class="navbtns-content">
-                                <svg class="navicons" viewBox="0 0 32 32">
-                                <g>
-                                    <rect class="to-fill" x="6.7" y="9" width="18.6" height="14.1"/>
-                                    <polyline class="stroke to-trnsprnt" stroke-width="2.5" stroke-linejoin="bevel" points="6.7,10 16,16 25.3,10"/>
-                                    <rect class="stroke" stroke-width="2.5" x="6.7" y="9" width="18.6" height="14.1"/>
+                                <div class="icon-container">
+                                    <svg class="navicons" viewBox="0 0 32 32">
+                                    <g>
+                                        <rect class="to-fill" x="7.7" y="9.2" width="16.5" height="12.8"/>
+                                        <path class="fill" d="M8.2,10.5v11.1h15.5V10.5H8.2z M24.7,8l1.6,2v14H5.8V10l1.6-2H24.7z"/>
+                                        <polygon class="fill to-trnsprnt" points="7.3,8 16,14.4 24.7,8 26.3,8 26.3,10 16.8,17 15.2,17 5.8,10 5.8,8"/>
 
-                                    <path class="fill" d="M28,32H4l-4-4V4l4-4h24l4,4v24L28,32z M6.1,29.1l19.7,0l3.3-3.3l0-19.7l-3.3-3.3l-19.7,0L2.9,6.1l0,19.7L6.1,29.1z"/>
-                                </g>
-                                </svg>
+                                        <path id="frame" class="fill" d="M26.8,3L29,5.2v21.5L26.8,29H5.2L3,26.8V5.2L5.2,3H26.8 M28,0H4C2.4,1.6,1.6,2.4,0,4v24c1.6,1.6,2.4,2.4,4,4h24c1.6-1.6,2.4-2.4,4-4V4C30.4,2.4,29.6,1.6,28,0L28,0z"/>
+                                    </g>
+                                    </svg>
+                                </div>
                                 <span>CONTACT</span>
                             </div>
                         </div>
@@ -112,10 +126,12 @@ function init() {
         `;
 
         navIcons = document.querySelectorAll(".navlink .navbtns-content svg.navicons"),
+        navDiv = document.querySelectorAll("a.navlink > div"),
         nav = document.querySelector("nav"),
         navAC = document.querySelector("#navaccueil-content"),
         navA = document.querySelector(".navlink#accueil"),
-        navASep = document.querySelector(".nav-separator");
+        navASep = document.querySelector(".nav-separator"),
+        navLBG = document.querySelector("#nav-layerbg");
 
         function contentMarginLeftCheck() {
             if(isMobile == false) {
@@ -142,9 +158,10 @@ function init() {
                     document.querySelector(nlpPath + " .nav-sel").classList.add("nlsel-current");
                     nl.classList.add("nl-current");
 
+                    document.querySelector(nlpPath + " .navbtns-content .icon-container").classList.add("nlsvgc-current");
+                    addClassAll(nliPath + " g", "nli-current");
                     addClassAll(nliPath + " .to-fill", "nli-current-fill");
-                    addClassAll(nliPath + " .stroke.to-trnsprnt", "nli-current-trnsprnt");
-                    document.querySelector(nliPath + " g").classList.add("nli-current");
+                    addClassAll(nliPath + " .to-trnsprnt", "nli-current-trnsprnt");
                 } else { // ACCUEIL
                     document.querySelector(nlPath + " .nav-separator").classList.add("nl-current");
                 }
@@ -174,9 +191,10 @@ function init() {
 
             removeClassAll(nlNotPath, "nl-current");
             removeClassAll(nlNotPath + " .nav-sel", "nlsel-current");
+            removeClassAll(nlNotPath + " .navbtns-content .icon-container", "nlsvgc-current");
             removeClassAll(nliNotPath + " g", "nli-current");
             removeClassAll(nliNotPath + " .to-fill", "nli-current-fill");
-            removeClassAll(nliNotPath + " .stroke.to-trnsprnt", "nli-current-trnsprnt");
+            removeClassAll(nliNotPath + " .to-trnsprnt", "nli-current-trnsprnt");
 
             // MOBILE
             if(isMobile == true) { swup.scrollTo(document.body, 0); }
@@ -247,29 +265,30 @@ function init() {
             navAC.style.opacity = null;
         }
         function mobileTopNavN_reset() {
-            navIcons.forEach(function(ni) {
-                ni.style.height = null;
-                ni.style.margin = null;
-            });
+            navDiv.forEach(function(ni) { ni.style.margin = null; });
+            navIcons.forEach(function(ni) { ni.style.height = null; });
         }
         function mobileTopNav() {
             if(isMobile == true) {
                 var topnavH = navPos.offsetHeight - nav.offsetHeight;
                 if(window.scrollY > topnavH) { // MOBILE free
-                    navPos.style.top = -topnavH + "px";
-                    navIcons.forEach(function(ni) {
-                        ni.style.height = "clamp(40px, 8vw, 45px)";
-                        ni.style.margin = "12.5px clamp(15px, 5vw, 30px) 10px";
-                    });
-                    mobileTopNavA_reset();
-                    document.querySelector("#nav-layerbg").style.height = nav.offsetHeight + "px";
+                    if(navLBG.style.height != nav.offsetHeight + "px") {
+                        navPos.style.top = -topnavH + "px";
+                        navDiv.forEach(function(ni) {
+                            ni.style.margin = "12.5px clamp(15px, 5vw, 30px) 10px"; });
+                        navIcons.forEach(function(ni) {
+                            ni.style.height = "clamp(40px, 8vw, 45px)"; });
+                        mobileTopNavA_reset();
+                        navLBG.style.height = nav.offsetHeight + "px";
+                    }
                 } else { // MOBILE lock
                     var scrollPercent = window.scrollY / topnavH;
                     navA.style.transform = "translateY(-" + (scrollPercent / 0.275) + "vw)";
                     navASep.style.transform = "translateY(-" + (scrollPercent / 0.75) + "vw)";
-                    navAC.style.opacity = 1.2 - (scrollPercent * 1.2);
+                    navAC.style.opacity = 1.3 - (scrollPercent * 1.4);
                     navPos.style.top = -window.scrollY + "px";
                     mobileTopNavN_reset();
+                    navLBG.style.height = "0";
                 }
             } else { // PC
                 navA.style.transform = null;
