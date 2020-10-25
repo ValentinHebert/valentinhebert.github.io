@@ -3,6 +3,10 @@
     --accent-prim: #ffffff;
     --accenttxt: var(--accent-prim);
     --VHTRP-txttr: 0.25s ease;
+
+    --pagebg-add: 10;
+    --pagebg-size: calc(100% + (var(--pagebg-add) * 1%));
+    --pagebg-pos: calc(0% - ((var(--pagebg-add) / 2) * 1%));
 }
 :root.photographie {
     --accent-sec: #ffffff;
@@ -64,10 +68,10 @@ html.is-rendering .transition-vh {
 }
 
 #parallax-bg {
-    width: 105%;
-    height: 105%;
-    top: -2.5%;
-    left: -2.5%;
+    width: var(--pagebg-size);
+    height: var(--pagebg-size);
+    top: var(--pagebg-pos);
+    left: var(--pagebg-pos);
     position: fixed;
     overflow: hidden;
 }
@@ -398,11 +402,15 @@ main#swup {
 }
 
 @media (max-width: 727px) /* MOBILE */ {
+    :root {
+        --pagebg-add: 35;
+    }
     .navlink-p > div span,
     .navlink-p .nav-sel,
     #nav-social {
         display: none;
     }
+
     nav {
         display: flex;
         justify-content: center;

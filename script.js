@@ -9,10 +9,6 @@ const swup = new Swup({
 var parallaxBG = new Parallax(document.getElementById('parallax-bg'), {
     limitX: false,
     limitY: false,
-    scalarX: 1.1,
-    scalarY: 1.1,
-    frictionX: 0.2,
-    frictionY: 0.2
 });
 
 var doc = document.documentElement,
@@ -20,9 +16,23 @@ var doc = document.documentElement,
     svgNS = 'http://www.w3.org/2000/svg',
     vhtrpColor = {'accueil' : '#4B4B4B', 'photographie' : '#f0f0f0', 'video' : '#0f0f0f', 'contact' : '#212121'};
 
-function checkWinSize() { if(window.innerWidth > 727) { isMobile = false; parallaxBG.scalar(1.1, 1.1); parallaxBG.friction(0.2, 0.2);
-    } else { isMobile = true; parallaxBG.scalar(7, 3); parallaxBG.friction(0.1, 0.1); }};
-checkWinSize(); window.addEventListener("resize", checkWinSize);
+function checkWinSize() { if(window.innerWidth > 727) { isMobile = false; } else { isMobile = true; }};
+checkWinSize(); window.addEventListener('resize', checkWinSize);
+
+
+parallaxBG.scalar(2, 3);
+parallaxBG.friction(0.2, 0.2);
+window.addEventListener('devicemotion', function(event) { // check if device has gyroscope
+    if(event.rotationRate.alpha || event.rotationRate.beta || event.rotationRate.gamma) {
+        parallaxBG.scalar(8, 4);
+        parallaxBG.friction(0.1, 0.1);
+        var pagebgAdd = getComputedStyle(document.documentElement).getPropertyValue('--pagebg-add'),
+            parallaxBGel = document.querySelector('#parallax-bg'),
+            parallaxBGelW = parallaxBGel.offsetWidth,
+            parallaxBGelH = parallaxBGel.offsetHeight;
+        parallaxBG.limit(parallaxBGelW * pagebgAdd / 100, parallaxBGelH * pagebgAdd / 100);
+    }
+});
 
 function addClassAll(path, c) {
     var elems = document.querySelectorAll(path);
