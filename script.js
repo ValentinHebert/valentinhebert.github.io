@@ -7,7 +7,6 @@ const swup = new Swup({
 });
 
 var parallaxBG = new Parallax(document.getElementById('parallax-bg'), {
-    relativeInput: true,
     invertX: false,
     invertY: false,
     frictionX: 0.2,
