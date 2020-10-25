@@ -6,7 +6,7 @@ const swup = new Swup({
     })]
 });
 
-var parallaxBG = new Parallax(document.getElementById("parallax-bg"), {
+var parallaxBG = new Parallax(document.getElementById('parallax-bg'), {
     limitX: false,
     limitY: false,
     scalarX: 1.1,
@@ -17,8 +17,8 @@ var parallaxBG = new Parallax(document.getElementById("parallax-bg"), {
 
 var doc = document.documentElement,
     isMobile = undefined,
-    svgNS = "http://www.w3.org/2000/svg",
-    vhtrpColor = {"accueil" : "#4B4B4B", "photographie" : "#f0f0f0", "video" : "#0f0f0f", "contact" : "#212121"};
+    svgNS = 'http://www.w3.org/2000/svg',
+    vhtrpColor = {'accueil' : '#4B4B4B', 'photographie' : '#f0f0f0', 'video' : '#0f0f0f', 'contact' : '#212121'};
 
 function checkWinSize() { if(window.innerWidth > 727) { isMobile = false; parallaxBG.scalar(1.1, 1.1); parallaxBG.friction(0.2, 0.2);
     } else { isMobile = true; parallaxBG.scalar(7, 3); parallaxBG.friction(0.1, 0.1); }};
@@ -34,16 +34,16 @@ function removeClassAll(path, c) {
 }
 
 function init() {
-    var navPos = document.querySelector("#nav-pos");
+    var navPos = document.querySelector('#nav-pos');
 
     function getPageID() {
         pathDir = ((window.location.pathname).replace(/\/[^/]*$/, '')).replace(/^\//, '');
-        if(window.location.pathname == "/") { pathDir = "accueil"; }
+        if(window.location.pathname == '/') { pathDir = 'accueil'; }
         return pathDir;
     }
     getPageID();
 
-    if(pathDir == "accueil" || pathDir == "contact") { parallaxBG.enable(); } else { parallaxBG.disable(); }
+    if(pathDir == 'accueil' || pathDir == 'contact') { parallaxBG.enable(); } else { parallaxBG.disable(); }
 
     if (navPos.hasChildNodes() == false) { // NAVIGATION
         navPos.innerHTML = `
@@ -136,56 +136,56 @@ function init() {
             </div>
         `;
 
-        navIcons = document.querySelectorAll(".navlink .navbtns-content svg.navicons"),
-        navDiv = document.querySelectorAll("a.navlink > div"),
-        nav = document.querySelector("nav"),
-        navAC = document.querySelector("#navaccueil-content"),
-        navA = document.querySelector(".navlink#accueil"),
-        navASep = document.querySelector(".nav-separator"),
-        navLBG = document.querySelector("#nav-layerbg");
+        navIcons = document.querySelectorAll('.navlink .navbtns-content svg.navicons'),
+        navDiv = document.querySelectorAll('a.navlink > div'),
+        nav = document.querySelector('nav'),
+        navAC = document.querySelector('#navaccueil-content'),
+        navA = document.querySelector('.navlink#accueil'),
+        navASep = document.querySelector('.nav-separator'),
+        navLBG = document.querySelector('#nav-layerbg');
 
         function contentMarginLeftCheck() {
             if(isMobile == false) {
-                document.querySelector("#content-container").style.marginLeft = navPos.offsetWidth + "px";
+                document.querySelector('#content-container').style.marginLeft = navPos.offsetWidth + 'px';
             } else {
-                document.querySelector("#content-container").style.marginTop = navPos.offsetHeight + "px";
+                document.querySelector('#content-container').style.marginTop = navPos.offsetHeight + 'px';
             }
             mobileTopNav();
         };
-        contentMarginLeftCheck(); window.addEventListener("resize", contentMarginLeftCheck);
+        contentMarginLeftCheck(); window.addEventListener('resize', contentMarginLeftCheck);
 
         function applyBGColor(ID) {
             function pageBGClass(ID) {
-                document.querySelector("#page-bg").className = "";
-                document.querySelector("#page-bg").classList.add(ID);
+                document.querySelector('#page-bg').className = '';
+                document.querySelector('#page-bg').classList.add(ID);
             }
             pageBGClass(ID);
             document.body.style.backgroundColor = vhtrpColor[ID];
-            document.querySelector("#container").style.backgroundColor = vhtrpColor[ID];
+            document.querySelector('#container').style.backgroundColor = vhtrpColor[ID];
         }
         function applyPageTheme(ID) {
             function navCurrentStyle(nlID) {
-                var nl = document.querySelector(".navlink#" + nlID),
-                    nlPath = ".navlink#" + nlID,
-                    nlpPath = ".navlink-p#" + nlID,
-                    nliPath = nlpPath + " .navbtns-content svg.navicons";
+                var nl = document.querySelector('.navlink#' + nlID),
+                    nlPath = '.navlink#' + nlID,
+                    nlpPath = '.navlink-p#' + nlID,
+                    nliPath = nlpPath + ' .navbtns-content svg.navicons';
 
-                if(nl.classList.contains("navlink-p")) { // NORMAL
-                    document.querySelector(nlpPath + " .nav-sel").classList.add("nlsel-current");
-                    nl.classList.add("nl-current");
+                if(nl.classList.contains('navlink-p')) { // NORMAL
+                    document.querySelector(nlpPath + ' .nav-sel').classList.add('nlsel-current');
+                    nl.classList.add('nl-current');
 
-                    document.querySelector(nlpPath + " .navbtns-content .icon-container").classList.add("nlsvgc-current");
-                    addClassAll(nliPath + " g", "nli-current");
-                    addClassAll(nliPath + " .to-fill", "nli-current-fill");
-                    addClassAll(nliPath + " .to-trnsprnt", "nli-current-trnsprnt");
+                    document.querySelector(nlpPath + ' .navbtns-content .icon-container').classList.add('nlsvgc-current');
+                    addClassAll(nliPath + ' g', 'nli-current');
+                    addClassAll(nliPath + ' .to-fill', 'nli-current-fill');
+                    addClassAll(nliPath + ' .to-trnsprnt', 'nli-current-trnsprnt');
                 } else { // ACCUEIL
-                    document.querySelector(nlPath + " .nav-separator").classList.add("nl-current");
+                    document.querySelector(nlPath + ' .nav-separator').classList.add('nl-current');
                 }
             }
-            if(ID == "accueil") { toAccueil = true; } else { toAccueil = false; navCurrentStyle(ID); }
-            if(ID == "photographie") { document.documentElement.classList.add("photographie");
+            if(ID == 'accueil') { toAccueil = true; } else { toAccueil = false; navCurrentStyle(ID); }
+            if(ID == 'photographie') { document.documentElement.classList.add('photographie');
             } else {
-                document.documentElement.classList.remove("photographie");
+                document.documentElement.classList.remove('photographie');
             }
         }
         applyBGColor(pathDir);
@@ -194,35 +194,35 @@ function init() {
 
         function pagetrBull(event, histbr, nl) {
             if(histbr == true) { event = getPageID(); }
-            if(nl == null) { nl = document.querySelector(".navlink#" + event); }
+            if(nl == null) { nl = document.querySelector('.navlink#' + event); }
 
             var pageW = document.documentElement.clientWidth,
                 pageH = document.documentElement.clientHeight,
                 nlID = nl.id,
-                nlNotPath = ".navlink-p:not(#" + nlID + ")",
-                nliNotPath = nlNotPath + " .navbtns-content svg.navicons";
+                nlNotPath = '.navlink-p:not(#' + nlID + ')',
+                nliNotPath = nlNotPath + ' .navbtns-content svg.navicons';
 
             applyPageTheme(nlID);
             doc.style.setProperty('--bgpage', vhtrpColor[nlID]);
 
-            removeClassAll(nlNotPath, "nl-current");
-            removeClassAll(nlNotPath + " .nav-sel", "nlsel-current");
-            removeClassAll(nlNotPath + " .navbtns-content .icon-container", "nlsvgc-current");
-            removeClassAll(nliNotPath + " g", "nli-current");
-            removeClassAll(nliNotPath + " .to-fill", "nli-current-fill");
-            removeClassAll(nliNotPath + " .to-trnsprnt", "nli-current-trnsprnt");
+            removeClassAll(nlNotPath, 'nl-current');
+            removeClassAll(nlNotPath + ' .nav-sel', 'nlsel-current');
+            removeClassAll(nlNotPath + ' .navbtns-content .icon-container', 'nlsvgc-current');
+            removeClassAll(nliNotPath + ' g', 'nli-current');
+            removeClassAll(nliNotPath + ' .to-fill', 'nli-current-fill');
+            removeClassAll(nliNotPath + ' .to-trnsprnt', 'nli-current-trnsprnt');
 
             // MOBILE
             if(isMobile == true) { swup.scrollTo(document.body, 0); }
 
             // VHTRP
-            var newVHTRC = document.createElementNS(svgNS, "svg"),
-                newVHTRCc = document.createElementNS(svgNS, "circle");
-            newVHTRC.classList.add("vhtrp-circle"); newVHTRC.id = nlID;
-            newVHTRC.setAttribute("viewBox", "0 0 " + (pageW / 100) + " " + (pageH / 100)); 
+            var newVHTRC = document.createElementNS(svgNS, 'svg'),
+                newVHTRCc = document.createElementNS(svgNS, 'circle');
+            newVHTRC.classList.add('vhtrp-circle'); newVHTRC.id = nlID;
+            newVHTRC.setAttribute('viewBox', '0 0 ' + (pageW / 100) + ' ' + (pageH / 100)); 
             newVHTRC.style.fill = vhtrpColor[nlID];
             newVHTRC.appendChild(newVHTRCc);
-            document.querySelector("#vhtrp").appendChild(newVHTRC);
+            document.querySelector('#vhtrp').appendChild(newVHTRC);
 
             if(histbr == false) { // normal
                 if(nl.mouseIsOver == true) {
@@ -237,7 +237,7 @@ function init() {
                 }
             } else { // history browsing
                 var nltxt = nl;
-                if(nl.classList.contains("navlink-p")) { nltxt = document.querySelector(".navlink#" + event + " .navbtns-content"); }
+                if(nl.classList.contains('navlink-p')) { nltxt = document.querySelector('.navlink#' + event + ' .navbtns-content'); }
                 var nlposX = nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2),
                     nlposY = nltxt.getBoundingClientRect().top + (nltxt.offsetHeight / 2),
                     VHTRcPosX = (Math.round(nltxt.getBoundingClientRect().left + (nltxt.offsetWidth / 2)) / 100),
@@ -249,29 +249,29 @@ function init() {
             }
             nlCR = (Math.round(((nlTLenW)**2 + (nlTLenH)**2)**(1/2)) / 100) + 0.1;
 
-            newVHTRCc.setAttribute("cx", VHTRcPosX)
-            newVHTRCc.setAttribute("cy", VHTRcPosY)
+            newVHTRCc.setAttribute('cx', VHTRcPosX)
+            newVHTRCc.setAttribute('cy', VHTRcPosY)
             setTimeout(function () {
-                newVHTRCc.style.transition = "r 900ms cubic-bezier(0.5, 0.7, 0, 1)";
-                newVHTRCc.setAttribute("r", nlCR)
+                newVHTRCc.style.transition = 'r 900ms cubic-bezier(0.5, 0.7, 0, 1)';
+                newVHTRCc.setAttribute('r', nlCR)
             }, 10);
             setTimeout(function () {
                 applyBGColor(nlID);
-                newVHTRC.style.transition = "opacity 600ms ease";
-                newVHTRC.style.opacity = "0";
+                newVHTRC.style.transition = 'opacity 600ms ease';
+                newVHTRC.style.opacity = '0';
                 setTimeout(function () {
                     newVHTRC.remove();
                 }, 600);
             }, 900);
         }
-        document.querySelectorAll(".navlink").forEach(function(nl) {
+        document.querySelectorAll('.navlink').forEach(function(nl) {
             nl.mouseIsOver = false;
             nl.onmouseover = function() { this.mouseIsOver = true; };
             nl.onmouseout = function() { this.mouseIsOver = false; };
 
-            nl.addEventListener("click", function(event) { pagetrBull(event, false, nl); });
+            nl.addEventListener('click', function(event) { pagetrBull(event, false, nl); });
         });
-        swup.on("popState", function() { pagetrBull(null, true, null); });
+        swup.on('popState', function() { pagetrBull(null, true, null); });
         
         function mobileTopNavA_reset() {
             navA.style.transform = null;
@@ -286,24 +286,24 @@ function init() {
             if(isMobile == true) {
                 var topnavH = navPos.offsetHeight - nav.offsetHeight;
                 if(window.scrollY > topnavH) { // MOBILE free
-                    if(navLBG.style.height != nav.offsetHeight + "px") {
-                        navPos.style.top = -topnavH + "px";
+                    if(navLBG.style.height != nav.offsetHeight + 'px') {
+                        navPos.style.top = -topnavH + 'px';
                         navDiv.forEach(function(ni) {
-                            ni.style.margin = "12.5px clamp(15px, 5vw, 30px) 10px"; });
+                            ni.style.margin = '12.5px clamp(15px, 5vw, 30px) 10px'; });
                         navIcons.forEach(function(ni) {
-                            ni.style.height = "clamp(40px, 8vw, 45px)"; });
+                            ni.style.height = 'clamp(40px, 8vw, 45px)'; });
                         mobileTopNavA_reset();
-                        navLBG.style.opacity = "1";
-                        navLBG.style.height = nav.offsetHeight + "px";
+                        navLBG.style.opacity = '1';
+                        navLBG.style.height = nav.offsetHeight + 'px';
                     }
                 } else { // MOBILE lock
                     var scrollPercent = window.scrollY / topnavH;
-                    navA.style.transform = "translateY(-" + (scrollPercent / 0.275) + "vw)";
-                    navASep.style.transform = "translateY(-" + (scrollPercent / 0.75) + "vw)";
+                    navA.style.transform = 'translateY(-' + (scrollPercent / 0.275) + 'vw)';
+                    navASep.style.transform = 'translateY(-' + (scrollPercent / 0.75) + 'vw)';
                     navAC.style.opacity = 1.3 - (scrollPercent * 1.4);
-                    navPos.style.top = -window.scrollY + "px";
+                    navPos.style.top = -window.scrollY + 'px';
                     mobileTopNavN_reset();
-                    navLBG.style.opacity = "0";
+                    navLBG.style.opacity = '0';
                 }
             } else { // PC
                 navA.style.transform = null;
@@ -312,8 +312,8 @@ function init() {
                 mobileTopNavN_reset();
             }
         }
-        mobileTopNav(); window.addEventListener("scroll", mobileTopNav);
+        mobileTopNav(); window.addEventListener('scroll', mobileTopNav);
     }
 }
 init();
-swup.on("contentReplaced", init);
+swup.on('contentReplaced', init);
