@@ -6,23 +6,19 @@ const swup = new Swup({
     })]
 });
 
-var pBG = document.getElementById("parallax-bg");
-var parallaxInstance = new Parallax(pBG, {
+var parallaxBG = new Parallax(document.getElementById("parallax-bg"), {
     limitX: false,
     limitY: false,
-    scalarX: 5.0,
-    scalarY: 5.0,
+    scalarX: 4,
+    scalarY: 4,
     frictionX: 0.2,
     frictionY: 0.2
   });
-
-
 
 var doc = document.documentElement,
     isMobile = undefined,
     svgNS = "http://www.w3.org/2000/svg",
     vhtrpColor = {"accueil" : "#4B4B4B", "photographie" : "#f0f0f0", "video" : "#0f0f0f", "contact" : "#212121"};
-
 
 function checkWinSize() { if(window.innerWidth > 727) { isMobile = false } else { isMobile = true }};
 checkWinSize(); window.addEventListener("resize", checkWinSize);
@@ -45,6 +41,8 @@ function init() {
         return pathDir;
     }
     getPageID();
+
+    if(pathDir == "accueil" || pathDir == "contact") { parallaxBG.enable(); } else { parallaxBG.disable(); }
 
     if (navPos.hasChildNodes() == false) { // NAVIGATION
         navPos.innerHTML = `
