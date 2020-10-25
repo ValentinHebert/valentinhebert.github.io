@@ -64,8 +64,10 @@ html.is-rendering .transition-vh {
 }
 
 #parallax-bg {
-    width: 100%;
-    height: 100%;
+    width: 105%;
+    height: 105%;
+    top: -2.5%;
+    left: -2.5%;
     position: fixed;
     overflow: hidden;
 }

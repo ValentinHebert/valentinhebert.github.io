@@ -9,8 +9,8 @@ const swup = new Swup({
 var parallaxBG = new Parallax(document.getElementById("parallax-bg"), {
     limitX: false,
     limitY: false,
-    scalarX: 4,
-    scalarY: 4,
+    scalarX: 1.1,
+    scalarY: 1.1,
     frictionX: 0.2,
     frictionY: 0.2
   });
