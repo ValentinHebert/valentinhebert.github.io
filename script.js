@@ -6,6 +6,18 @@ const swup = new Swup({
     })]
 });
 
+var pBG = document.getElementById("parallax-bg");
+var parallaxInstance = new Parallax(pBG, {
+    limitX: false,
+    limitY: false,
+    scalarX: 5.0,
+    scalarY: 5.0,
+    frictionX: 0.2,
+    frictionY: 0.2
+  });
+
+
+
 var doc = document.documentElement,
     isMobile = undefined,
     svgNS = "http://www.w3.org/2000/svg",
@@ -282,6 +294,7 @@ function init() {
                         navIcons.forEach(function(ni) {
                             ni.style.height = "clamp(40px, 8vw, 45px)"; });
                         mobileTopNavA_reset();
+                        navLBG.style.opacity = "1";
                         navLBG.style.height = nav.offsetHeight + "px";
                     }
                 } else { // MOBILE lock
@@ -291,7 +304,7 @@ function init() {
                     navAC.style.opacity = 1.3 - (scrollPercent * 1.4);
                     navPos.style.top = -window.scrollY + "px";
                     mobileTopNavN_reset();
-                    navLBG.style.height = "0";
+                    navLBG.style.opacity = "0";
                 }
             } else { // PC
                 navA.style.transform = null;

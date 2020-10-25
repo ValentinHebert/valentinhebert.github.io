@@ -62,8 +62,15 @@ html.is-rendering .transition-vh {
 #page-bg.accueil ~ #nav-layerbg {
     display: none;
 }
+
+#parallax-bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+}
+
 #container {
-    display: table;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -446,8 +453,9 @@ main#swup {
         left: 0px;
         width: 100%;
         height: 71px;
+        opacity: 0;
         background-color: var(--bgpage);
-        transition: background-color 0.3s 0.4s ease;
+        transition: opacity 0.3s cubic-bezier(0.4, 0.7, 0, 1), background-color 0.3s 0.4s ease;
     }
 
 
