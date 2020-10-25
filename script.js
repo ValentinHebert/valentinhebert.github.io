@@ -26,7 +26,7 @@ checkWinSize(); window.addEventListener('resize', checkWinSize);
 parallaxBG.scalar(1, 2);
 window.addEventListener('devicemotion', function(event) { // check if device has gyroscope
     if(event.rotationRate.alpha || event.rotationRate.beta || event.rotationRate.gamma) {
-        parallaxBG.scalar(5, 2);
+        parallaxBG.scalar(5, 3);
         var pagebgAdd = getComputedStyle(document.documentElement).getPropertyValue('--pagebg-add'),
             parallaxBGel = document.querySelector('#parallax-bg'),
             parallaxBGelW = parallaxBGel.offsetWidth,
