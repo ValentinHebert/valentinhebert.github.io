@@ -7,8 +7,8 @@ const swup = new Swup({
 });
 
 var parallaxBG = new Parallax(document.getElementById('parallax-bg'), {
-    limitX: false,
-    limitY: false,
+    frictionX: 0.2,
+    frictionY: 0.2
 });
 
 var doc = document.documentElement,
@@ -21,11 +21,9 @@ checkWinSize(); window.addEventListener('resize', checkWinSize);
 
 
 parallaxBG.scalar(2, 3);
-parallaxBG.friction(0.2, 0.2);
 window.addEventListener('devicemotion', function(event) { // check if device has gyroscope
     if(event.rotationRate.alpha || event.rotationRate.beta || event.rotationRate.gamma) {
         parallaxBG.scalar(8, 4);
-        parallaxBG.friction(0.1, 0.1);
         var pagebgAdd = getComputedStyle(document.documentElement).getPropertyValue('--pagebg-add'),
             parallaxBGel = document.querySelector('#parallax-bg'),
             parallaxBGelW = parallaxBGel.offsetWidth,
