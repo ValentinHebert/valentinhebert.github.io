@@ -21,7 +21,7 @@ var doc = document.documentElement,
     vhtrpColor = {"accueil" : "#4B4B4B", "photographie" : "#f0f0f0", "video" : "#0f0f0f", "contact" : "#212121"};
 
 function checkWinSize() { if(window.innerWidth > 727) { isMobile = false; parallaxBG.scalar(1.1, 1.1); parallaxBG.friction(0.2, 0.2);
-    } else { isMobile = true; parallaxBG.scalar(7, 5); parallaxBG.friction(0.1, 0.1); }};
+    } else { isMobile = true; parallaxBG.scalar(7, 3); parallaxBG.friction(0.1, 0.1); }};
 checkWinSize(); window.addEventListener("resize", checkWinSize);
 
 function addClassAll(path, c) {
