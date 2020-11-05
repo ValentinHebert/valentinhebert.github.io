@@ -439,11 +439,15 @@ input, textarea {
     top: 0;
     left: calc(0px - var(--form-padding));
     width: 100%;
-    height: 75%;
-    padding: 0px var(--form-padding) 0;
-    border-top-right-radius: var(--form-padding);
-    border-top-left-radius: var(--form-padding);
+    height: 100%;
+    padding: 0 var(--form-padding);
+    border-radius: var(--form-padding);
     background-color: var(--bgform);
+}
+.input-c.focus .input-title::after {
+    height: 75%;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 .input-title,
 .input-title span {
