@@ -7,6 +7,9 @@
     --pagebg-add: 10;
     --pagebg-size: calc(100% + (var(--pagebg-add) * 1%));
     --pagebg-pos: calc(0% - ((var(--pagebg-add) / 2) * 1%));
+    
+    --form-padding: 13.5px;
+    --bgform: var(--bgpage-f);
 }
 :root.photographie {
     --accent-sec: #ffffff;
@@ -23,22 +26,27 @@
 }
 body {
     margin: 0;
-    font-family: "Roboto Slab";
-    font-weight: 500;
-    color: var(--accenttxt);
-    background-color: #232323;
+    background-color: var(--bgpage-f);
     opacity: 1;
     animation: opacity-FadeIn 0.5s 0.15s ease backwards;
 }
+body, input, textarea {
+    font-family: "Roboto Slab";
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--accenttxt) !important;
+}
+
 
 /*--/ SWUP /--*/
 .transition-vh {
     opacity: 1;
-    transition: 0.4s 0.1s;
+    transition: 0.4s 0.2s;
 }
 html.is-animating .transition-vh {
     opacity: 0;
-    transition: 0.9s;
+    transition: 0.2s 0.4s;
 }
 html.is-rendering .transition-vh {
     transition: 0.4s;
@@ -80,7 +88,7 @@ html.is-rendering .transition-vh {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #232323;
+    background-color: var(--bgpage-f);
 }
 
 #nav-pos {
@@ -134,7 +142,7 @@ nav, #nav-social {
     position: relative;
     line-height: 1.25;
     text-decoration: none;
-    font-size: clamp(17.5px, 2.5vw, 25px);
+    font-size: clamp(17.5px, 2.5vw, 30px);
     letter-spacing: 1.5px;
     transition: letter-spacing 0.5s cubic-bezier(0.3, 0.6, 0, 1);
 }
@@ -205,7 +213,7 @@ nav, #nav-social {
     transition: transform 0.3s cubic-bezier(0.3, 0.7, 0, 1) !important;
 }
 .navbtns-content svg.navicons {
-    height: clamp(15px, 2.15vw, 21px);
+    height: clamp(17.5px, 2.5vw, 29px);
     position: relative;
     fill: transparent;
     stroke: transparent;
@@ -365,20 +373,101 @@ nav, #nav-social {
 /*-/ CONTENT /-*/
 #content-container {
     z-index: 100;
+    flex-grow: 1;
     position: relative;
     width: auto;
     height: auto;
     padding: 5%;
 }
 main#swup {
+    display: flex;
+    justify-content: center;
     position: relative;
     width: 100%;
     height: 100%;
 }
 
 
+/*-/ ABOUT /-*/
+/* FORM */
+#contact-mail {
+    width: calc(200% / 3);
+}
+@media (max-width: 1000px) {
+    #contact-mail {
+        width: 100%;
+    }
+}
+
+input, textarea {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    padding: var(--form-padding);
+    font-size: 20px;
+    border: none !important;
+    outline: transparent !important;
+    transition: outline 0.3s !important;
+    background-color: var(--bgform) !important;
+}
+
+.input-sameline {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.input-c {
+    position: relative;
+    flex-grow: 1;
+    margin: 0 10px 30px;
+}
+.input-title {
+    position: absolute;
+    top: var(--form-padding);
+    left: var(--form-padding);
+    transform: translateY(0%) rotateZ(0.0001deg);
+    pointer-events: none;
+}
+.input-title::after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(0px - var(--form-padding));
+    width: 100%;
+    height: 75%;
+    padding: 0px var(--form-padding) 0;
+    border-top-right-radius: var(--form-padding);
+    border-top-left-radius: var(--form-padding);
+    background-color: var(--bgform);
+}
+.input-title,
+.input-title span {
+    transition: 0.6s cubic-bezier(0.25, 0.75, 0, 1),
+                opacity 0.8s cubic-bezier(0.3, 0.6, 0, 1);
+}
+.input-c.focus .input-title,
+.input-c.focus .input-title span {
+    transition: 0.35s cubic-bezier(0.1, 0.7, 0, 0.9),
+                opacity 0.7s cubic-bezier(0.3, 0.6, 0, 1);
+}
+.input-c.focus .input-title {
+    transform: translateY(-100%) rotateZ(0.0001deg);
+}
+.input-c.focus .input-title span {
+    opacity: 0.5;
+    font-size: 16px;
+}
+.fieldError {
+    outline: 1px solid red !important;
+}
+
+
 @media (min-width: 728px) /* PC */ {
-    .navbtns-content .icon-container,
     #nav-layerbg {
         display: none;
     }
@@ -392,10 +481,17 @@ main#swup {
         padding: 8.5px 0;
     }
     .navbtns-content svg.navicons {
-        margin: 2px 6.5px 2px 0px;
+        margin-right: 5.5px;
+    }
+    .icon-container {
+        display: flex;
     }
 
 
+    #container {
+        display: flex;
+        align-items: center;
+    }
     #content-container {
         margin-top: 0 !important;
     }

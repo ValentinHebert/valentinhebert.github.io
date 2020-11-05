@@ -170,8 +170,7 @@ function init() {
                 document.querySelector('#page-bg').classList.add(ID);
             }
             pageBGClass(ID);
-            document.body.style.backgroundColor = vhtrpColor[ID];
-            document.querySelector('#container').style.backgroundColor = vhtrpColor[ID];
+            doc.style.setProperty('--bgpage-f', vhtrpColor[ID]);
         }
         function applyPageTheme(ID) {
             function navCurrentStyle(nlID) {
@@ -323,6 +322,68 @@ function init() {
             }
         }
         mobileTopNav(); window.addEventListener('scroll', mobileTopNav);
+    }
+
+    if(pathDir == 'contact') {
+        // FORM FOCUS (https://github.com/sefyudem/Contact-Form-HTML-CSS)
+        const inputs = document.querySelectorAll("form input, form textarea");
+        function inputFocusOnLoad(input) {
+            let parent = input.parentNode;
+            if(input.value != "") { parent.classList.add("focus"); }
+        }
+        function inputFocus() {
+          let parent = this.parentNode;
+          parent.classList.add("focus");
+          this.classList.remove("fieldError");
+        }
+        function inputFocusBlur() {
+            let parent = this.parentNode;
+            if(this.value == "") { parent.classList.remove("focus"); }
+        }
+        inputs.forEach((input) => {
+            input.addEventListener("focus", inputFocus);
+            input.addEventListener("blur", inputFocusBlur);
+            inputFocusOnLoad(input);
+        });
+
+        // FORM VALIDATION (https://www.codebrainer.com/blog/contact-form-in-javascript)
+        var cmFields = {};
+        cmFields.name = document.querySelector('form #name');
+        cmFields.email = document.querySelector('form #email');
+        cmFields.msg = document.querySelector('form #msg');
+
+        function isValid() {
+            function isNotEmpty(value) {
+                if (value == null || typeof value == 'undefined') return false;
+                return (value.length > 0);
+            }
+            function isEmail(value) {
+                let regex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+                return regex.test(String(value).toLowerCase());
+            }
+            function fieldValidation(field, validationFunction) {
+                if (field == null) return false;
+                let isFieldValid = validationFunction(field.value)
+                if (!isFieldValid) {
+                    field.classList.add("fieldError");
+                } else {
+                    field.classList.remove("fieldError");
+                }
+                return isFieldValid;
+            }
+            var valid = true;
+            valid &= fieldValidation(cmFields.name, isNotEmpty);
+            valid &= fieldValidation(cmFields.email, isEmail);
+            valid &= fieldValidation(cmFields.msg, isNotEmpty);
+            return valid;
+        }
+        document.querySelector('form button#send').addEventListener('click', function() {
+            if(isValid()) {
+                console.log("valid");
+            } else {
+                console.log("nope");
+            }
+        });
     }
 }
 init();
