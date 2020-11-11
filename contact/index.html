@@ -17,23 +17,26 @@
         <div id="nav-pos"></div>
         <div id="content-container">
             <main id="swup" class="transition-vh">
-                <form id="contact-mail" onsubmit="return false">
-                    <div class="input-sameline">
+                <div id="form-container">
+                    <form id="contact-mail" onsubmit="return false">
                         <div class="input-c">
                             <input type="text" id="name" autocomplete="chrome-off"/>
+                            <div class="line"></div>
                             <div class="input-title"><span>Nom</span></div>
                         </div>
                         <div class="input-c">
                             <input type="email" id="email" autocomplete="chrome-off"/>
+                            <div class="line"></div>
                             <div class="input-title"><span>Adresse email</span></div>
                         </div>
-                    </div>
-                    <div class="input-c">
-                        <textarea id="msg" rows="4"></textarea>
-                        <div class="input-title"><span>Message</span></div>
-                    </div>
-                    <button id="send">Envoyer (not sending anything atm...)</button>
-                </form>
+                        <div class="input-c">
+                            <textarea id="msg" rows="7"></textarea>
+                            <div class="line"></div>
+                            <div class="input-title"><span>Message</span></div>
+                        </div>
+                        <button id="send">Envoyer<div class="bottom-line-button"></div></button>
+                    </form>
+                </div>
             </main>
         </div>
     </div>

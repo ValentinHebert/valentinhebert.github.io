@@ -327,27 +327,29 @@ function init() {
     if(pathDir == 'contact') {
         // FORM FOCUS (https://github.com/sefyudem/Contact-Form-HTML-CSS)
         const inputs = document.querySelectorAll("form input, form textarea");
-        function inputFocusOnLoad(input) {
-            let parent = input.parentNode;
-            if(input.value != "") { parent.classList.add("focus"); }
-        }
-        function inputFocus() {
-          let parent = this.parentNode;
+        function inputFocus(input) {
+          let parent = input.parentNode;
           parent.classList.add("focus");
-          this.classList.remove("fieldError");
+          parent.querySelector(".line").classList.add("focus");
+          input.classList.remove("notfocus");
+          input.classList.remove("fieldError");
         }
         function inputFocusBlur() {
             let parent = this.parentNode;
-            if(this.value == "") { parent.classList.remove("focus"); }
+            if(this.value == "") {
+                parent.classList.remove("focus");
+                parent.querySelector(".line").classList.remove("focus");
+                this.classList.add("notfocus");
+            }
         }
         inputs.forEach((input) => {
-            input.addEventListener("focus", inputFocus);
+            input.addEventListener("focus", function() { inputFocus(input) });
             input.addEventListener("blur", inputFocusBlur);
-            inputFocusOnLoad(input);
+            if(input.value != "") { inputFocus(input); }
         });
 
         // FORM VALIDATION (https://www.codebrainer.com/blog/contact-form-in-javascript)
-        var cmFields = {};
+        cmFields = {};
         cmFields.name = document.querySelector('form #name');
         cmFields.email = document.querySelector('form #email');
         cmFields.msg = document.querySelector('form #msg');
@@ -379,9 +381,13 @@ function init() {
         }
         document.querySelector('form button#send').addEventListener('click', function() {
             if(isValid()) {
-                console.log("valid");
-            } else {
-                console.log("nope");
+                // MAILTO (https://stackoverflow.com/a/31664656)
+                var body;
+                body =  document.location.href + '\n';
+                body += '\nAdresse email: ' + cmFields.email.value;
+                body +=  '\nNom: ' + cmFields.name.value;
+                body += '\nMessage:\n' + cmFields.msg.value;
+                window.location.href = 'mailto:test@example.com?body=' + encodeURIComponent(body) + '&subject=Contact - ' + cmFields.name.value;
             }
         });
     }
