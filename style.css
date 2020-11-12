@@ -525,6 +525,9 @@ button:active .bottom-line-button {
     transition: 0.5s cubic-bezier(0.3, 0.7, 0, 1),
                 opacity 50ms;
 }
+form button {
+    outline: none;
+}
 
 
 @media (min-width: 728px) /* PC */ {
