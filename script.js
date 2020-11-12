@@ -155,14 +155,14 @@ function init() {
         navLBG = document.querySelector('#nav-layerbg');
 
         function contentMarginLeftCheck() {
-            if(isMobile == false) {
-                document.querySelector('#content-container').style.marginLeft = navPos.offsetWidth + 'px';
-            } else {
-                document.querySelector('#content-container').style.marginTop = navPos.offsetHeight + 'px';
-            }
+            var contentC = document.querySelector('#content-container');
+            if(isMobile == false) { contentC.style.marginLeft = navPos.offsetWidth + 'px';
+            } else { contentC.style.marginTop = navPos.offsetHeight + 'px'; }
             mobileTopNav();
         };
-        contentMarginLeftCheck(); window.addEventListener('resize', contentMarginLeftCheck);
+        contentMarginLeftCheck();
+        window.addEventListener('resize', contentMarginLeftCheck);
+        window.addEventListener('resize', function() { setTimeout(contentMarginLeftCheck, 200); });
 
         function applyBGColor(ID) {
             function pageBGClass(ID) {
@@ -260,15 +260,15 @@ function init() {
 
             newVHTRCc.setAttribute('cx', VHTRcPosX)
             newVHTRCc.setAttribute('cy', VHTRcPosY)
-            setTimeout(function () {
+            setTimeout(function() {
                 newVHTRCc.style.transition = 'r 900ms cubic-bezier(0.5, 0.7, 0, 1)';
                 newVHTRCc.setAttribute('r', nlCR)
             }, 10);
-            setTimeout(function () {
+            setTimeout(function() {
                 applyBGColor(nlID);
                 newVHTRC.style.transition = 'opacity 600ms ease';
                 newVHTRC.style.opacity = '0';
-                setTimeout(function () {
+                setTimeout(function() {
                     newVHTRC.remove();
                 }, 600);
             }, 900);
@@ -306,6 +306,7 @@ function init() {
                         navLBG.style.height = nav.offsetHeight + 'px';
                     }
                 } else { // MOBILE lock
+            console.log("t");
                     var scrollPercent = window.scrollY / topnavH;
                     navA.style.transform = 'translateY(-' + (scrollPercent / 0.275) + 'vw)';
                     navASep.style.transform = 'translateY(-' + (scrollPercent / 0.75) + 'vw)';
@@ -321,7 +322,9 @@ function init() {
                 mobileTopNavN_reset();
             }
         }
-        mobileTopNav(); window.addEventListener('scroll', mobileTopNav);
+        mobileTopNav();
+        window.addEventListener('scroll', mobileTopNav);
+        window.addEventListener('resize', function() { setTimeout(mobileTopNav, 500); });
     }
 
     if(pathDir == 'contact') {

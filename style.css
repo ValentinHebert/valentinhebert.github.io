@@ -566,6 +566,9 @@ button:active .bottom-line-button {
     #nav-social {
         display: none;
     }
+    textarea {
+        resize: none;
+    }
 
     nav {
         display: flex;
@@ -627,5 +630,10 @@ button:active .bottom-line-button {
 
     #content-container {
         margin-left: 0 !important;
+    }
+
+    /*CONTACT FORM*/
+    .input-c:not(:nth-last-child(1)) {
+        margin-bottom: 20px;
     }
 }
