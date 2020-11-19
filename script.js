@@ -171,6 +171,10 @@ function init() {
             }
             pageBGClass(ID);
             doc.style.setProperty('--bgpage-f', vhtrpColor[ID]);
+            accenttxtContentUpdate();
+        }
+        function accenttxtContentUpdate() {
+            doc.style.setProperty('--accenttxt', getComputedStyle(doc).getPropertyValue('--accenttxt-nav'));
         }
         function applyPageTheme(ID) {
             function navCurrentStyle(nlID) {
@@ -192,13 +196,10 @@ function init() {
                 }
             }
             if(ID == 'accueil') { toAccueil = true; } else { toAccueil = false; navCurrentStyle(ID); }
-            if(ID == 'photographie') { document.documentElement.classList.add('photographie');
-            } else {
-                document.documentElement.classList.remove('photographie');
-            }
+            document.documentElement.id = ID;
         }
-        applyBGColor(pathDir);
         applyPageTheme(pathDir);
+        applyBGColor(pathDir);
         doc.style.setProperty('--bgpage', vhtrpColor[pathDir]);
 
         function pagetrBull(event, histbr, nl) {
@@ -264,6 +265,9 @@ function init() {
                 newVHTRCc.style.transition = 'r 900ms cubic-bezier(0.5, 0.7, 0, 1)';
                 newVHTRCc.setAttribute('r', nlCR)
             }, 10);
+            setTimeout(function() {
+                accenttxtContentUpdate();
+            }, 300);
             setTimeout(function() {
                 applyBGColor(nlID);
                 newVHTRC.style.transition = 'opacity 600ms ease';
