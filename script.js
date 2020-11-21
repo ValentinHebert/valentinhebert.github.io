@@ -154,15 +154,18 @@ function init() {
         mNavLBG.marginTopMax = 10;
         mNavLBG.marginBottomMax = 10;
         
-        function contentMarginLeftCheck() {
+        function contentMarginCheck() {
             var contentC = document.querySelector('#content-container');
             if(isMobile == false) { contentC.style.marginLeft = navPos.offsetWidth + 'px';
-            } else { contentC.style.marginTop = navPos.offsetHeight + 'px'; }
+            } else {
+                var c = document.querySelector('#nl-free-paddingtop').offsetHeight + document.getElementById('navaccueil-content').offsetHeight + mNavLBG.marginTopMax + mNavLBG.marginBottomMax
+                contentC.style.marginTop = 'calc(' + c + 'px + ' + mNavLBG.heightMax + ')';
+            }
             mobileTopNav();
         };
-        contentMarginLeftCheck();
-        window.addEventListener('resize', contentMarginLeftCheck);
-        window.addEventListener('resize', function() { setTimeout(contentMarginLeftCheck, 200); });
+        contentMarginCheck();
+        window.addEventListener('resize', contentMarginCheck);
+        window.addEventListener('resize', function() { setTimeout(contentMarginCheck, 200); });
 
         function applyBGColor(ID) {
             function pageBGClass(ID) {
