@@ -78,8 +78,7 @@ html.is-rendering .transition-vh {
 /*-/ NAVIGATION MENU /-*/
 #page-bg.accueil ~ #nav-layerbg,
 .navlink-p > div span,
-.navlink-p .nav-sel,
-#nav-social {
+.navlink-p .nav-sel {
     display: none;
 }
 
@@ -145,8 +144,6 @@ html.is-rendering .transition-vh {
 nav {
     display: flex;
     justify-content: center;
-}
-nav, #nav-social {
     margin-top: 25px;
 }
 .navlink {
@@ -360,15 +357,6 @@ nav, #nav-social {
     stroke: var(--bgpage) !important;
 }
 
-/* nav social */
-#ws-ig {
-    display: block;
-    width: 32px;
-    height: 32px;
-    fill: var(--accenttxt-nav);
-    transition: fill var(--VHTRP-txttr);
-}
-
 
 /*-/ BG /-*/
 #page-bg {
@@ -402,7 +390,9 @@ nav, #nav-social {
 }
 main#swup {
     display: flex;
+    align-items: center;
     justify-content: center;
+    flex-direction: column;
     position: relative;
     width: 90%;
     height: 100%;
@@ -556,6 +546,21 @@ form button {
 }
 
 
+/* social links */
+#social-links {
+    position: absolute;
+    bottom: 0;
+} 
+.social-link {
+    display: block;
+    width: clamp(32px, 4vw, 45px);
+    height: auto;
+    line-height: 0;
+    fill: var(--accenttxt);
+    transition: fill var(--VHTRP-txttr);
+}
+
+
 @media (min-width: 728px) /* PC */ {
     #nav-layerbg {
         display: none;
@@ -583,8 +588,7 @@ form button {
         --pagebg-add: 35;
     }
     .navlink-p > div span,
-    .navlink-p .nav-sel,
-    #nav-social {
+    .navlink-p .nav-sel {
         display: none;
     }
     textarea {
