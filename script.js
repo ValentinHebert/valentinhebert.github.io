@@ -133,6 +133,7 @@ function init() {
                             </div>
                         </div>
                     </a>
+                    <div id="nl-free-paddingtop"></div>
                 </nav>
                 <div id="nav-social">
                     <a id="ws-ig" href="https://www.instagram.com/valentinpointhache/">
@@ -154,6 +155,14 @@ function init() {
         navASep = document.querySelector('.nav-separator'),
         navLBG = document.querySelector('#nav-layerbg');
 
+        mNavLBG = {};
+        mNavLBG.heightMin = 'clamp(40px, 8vw, 45px)';
+        mNavLBG.heightMax = 'clamp(47.5px, 8vw, 55px)';
+        mNavLBG.marginTopMin = 11;
+        mNavLBG.marginBottomMin = 10;
+        mNavLBG.marginTopMax = 15;
+        mNavLBG.marginBottomMax = 10;
+        
         function contentMarginLeftCheck() {
             var contentC = document.querySelector('#content-container');
             if(isMobile == false) { contentC.style.marginLeft = navPos.offsetWidth + 'px';
@@ -297,20 +306,18 @@ function init() {
         }
         function mobileTopNav() {
             if(isMobile == true) {
-                var topnavH = navPos.offsetHeight - nav.offsetHeight;
+                topnavH = document.querySelector('#nl-free-paddingtop').offsetHeight + document.getElementById('navaccueil-content').offsetHeight + 10;
                 if(window.scrollY > topnavH) { // MOBILE free
-                    if(navLBG.style.height != nav.offsetHeight + 'px') {
-                        navPos.style.top = -topnavH + 'px';
-                        navDiv.forEach(function(ni) {
-                            ni.style.margin = '12.5px clamp(15px, 5vw, 30px) 10px'; });
-                        navIcons.forEach(function(ni) {
-                            ni.style.height = 'clamp(40px, 8vw, 45px)'; });
+                    if(mNavLockState != true) {
+                        mNavLockState = true;
+                        navPos.style.top = -(topnavH + 10) + 'px';
+                        navDiv.forEach(function(ni) { ni.style.margin = mNavLBG.marginTopMin + 'px clamp(15px, 5vw, 30px) ' + mNavLBG.marginBottomMin + 'px'; });
+                        navIcons.forEach(function(ni) { ni.style.height = mNavLBG.heightMin; });
                         mobileTopNavA_reset();
                         navLBG.style.opacity = '1';
-                        navLBG.style.height = nav.offsetHeight + 'px';
                     }
                 } else { // MOBILE lock
-            console.log("t");
+                    mNavLockState = false;
                     var scrollPercent = window.scrollY / topnavH;
                     navA.style.transform = 'translateY(-' + (scrollPercent / 0.275) + 'vw)';
                     navASep.style.transform = 'translateY(-' + (scrollPercent / 0.75) + 'vw)';
@@ -320,12 +327,16 @@ function init() {
                     navLBG.style.opacity = '0';
                 }
             } else { // PC
+                mNavLockState = false;
                 navA.style.transform = null;
                 navPos.style.top = null;
                 mobileTopNavA_reset();
                 mobileTopNavN_reset();
             }
         }
+
+        navLBG.style.height = 'calc(' + mNavLBG.heightMin + ' + ' + mNavLBG.marginTopMin + 'px + ' + mNavLBG.marginBottomMin + 'px)';
+
         mobileTopNav();
         window.addEventListener('scroll', mobileTopNav);
         window.addEventListener('resize', function() { setTimeout(mobileTopNav, 500); });
@@ -394,7 +405,7 @@ function init() {
                 body += '\nAdresse email: ' + cmFields.email.value;
                 body +=  '\nNom: ' + cmFields.name.value;
                 body += '\nMessage:\n' + cmFields.msg.value;
-                window.location.href = 'mailto:test@example.com?body=' + encodeURIComponent(body) + '&subject=Contact - ' + cmFields.name.value;
+                window.location.href = 'mailto:valentinhebertcontact@gmail.com?body=' + encodeURIComponent(body) + '&subject=Contact - ' + cmFields.name.value;
             }
         });
     }
