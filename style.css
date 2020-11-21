@@ -399,14 +399,14 @@ nav, #nav-social {
     position: relative;
     width: auto;
     height: auto;
-    padding: 5%;
 }
 main#swup {
     display: flex;
     justify-content: center;
     position: relative;
-    width: 100%;
+    width: 90%;
     height: 100%;
+    padding: 5%;
 }
 
 
@@ -570,11 +570,10 @@ form button {
         margin: 8.5px clamp(12.5px, 1.25vw, 25px);
     }
 
-    #container {
+    #content-container {
         display: flex;
         align-items: center;
-    }
-    #content-container {
+        min-height: 100%;
         margin-top: 0 !important;
     }
 }
