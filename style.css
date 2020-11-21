@@ -552,8 +552,7 @@ form button {
 /* social links */
 #social-links {
     position: absolute;
-    bottom: 0;
-} 
+}
 .social-link {
     display: block;
     width: clamp(32px, 4vw, 47.5px);
@@ -581,6 +580,9 @@ form button {
         align-items: center;
         min-height: 100%;
         margin-top: 0 !important;
+    }
+    #social-links {
+        bottom: 0;
     }
 }
 
@@ -620,7 +622,7 @@ form button {
     }
     
     .navlink-p > div {
-        margin: 15px clamp(7.5px, 2.5vw, 15px) 10px;
+        margin: 10px clamp(7.5px, 2.5vw, 15px) 10px;
         transition: margin 0.3s cubic-bezier(0.2, 0.5, 0, 1),
                     margin-top 0.2s cubic-bezier(0.3, 0.6, 0, 1),
                     margin-bottom 0.2s cubic-bezier(0.3, 0.6, 0, 1);
@@ -655,9 +657,19 @@ form button {
     #content-container {
         margin-left: 0 !important;
     }
+    main#swup {
+        padding-bottom: 15%;
+    }
 
-    /*CONTACT FORM*/
+    /*CONTACT*/
     .input-c:not(:nth-last-child(1)) {
         margin-bottom: 20px;
+    }
+    #social-links {
+        top: 100%;
+        padding-bottom: 15%;
+    }
+    .social-link {
+        width: clamp(42.5px, 7.5vw, 50px);
     }
 }

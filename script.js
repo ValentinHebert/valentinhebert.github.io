@@ -151,7 +151,7 @@ function init() {
         mNavLBG.heightMax = 'clamp(47.5px, 8vw, 55px)';
         mNavLBG.marginTopMin = 11;
         mNavLBG.marginBottomMin = 10;
-        mNavLBG.marginTopMax = 15;
+        mNavLBG.marginTopMax = 10;
         mNavLBG.marginBottomMax = 10;
         
         function contentMarginLeftCheck() {
