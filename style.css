@@ -18,7 +18,7 @@
     --pagebg-pos: calc(0% - ((var(--pagebg-add) / 2) * 1%));
     
     --form-padding: 13.5px;
-    --bgform: #2d2d2d;
+    --bgform: #f1f1f1;
 }
 
 ::selection {
