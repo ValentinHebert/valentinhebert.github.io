@@ -375,10 +375,20 @@ nav {
     background-repeat: no-repeat;
 }
 #page-bg.accueil {
-    background-image: url("/src/accueil/accueil-bg.jpg");
+    background-image: url("/src/accueil/prllx/bg.gif");
 }
 #page-bg.contact {
     background-image: url("/src/contact/contact-bg.jpg");
+}
+
+
+#subject {
+    width: 100%;
+    height: 100%;
+    background-image: url("/src/accueil/prllx/subject.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50px 0px;
 }
 
 
