@@ -391,6 +391,27 @@ nav {
     background-position: 50px 0px;
 }
 
+
+/*-/ CONTENT /-*/
+#content-container {
+    z-index: 100;
+    position: relative;
+    width: auto;
+    height: auto;
+}
+main#swup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    width: 80%;
+    height: 100%;
+    padding: 7.5% 10%;
+    padding-right: 0;
+}
+
+
 /*-/ PHOTOGRAPHIE /-*/
 div[class^="gallery"] {
     display: grid;
@@ -404,7 +425,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
     grid-template-columns: repeat(24, 1fr);
 }
 .gallery-i {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(9, 1fr);
 }
 .pic-tile > img {
     width: 100%;
@@ -437,26 +458,6 @@ div[class^="gallery"]:not(:nth-child(1)) {
     }
 }
 
-/*-/ CONTENT /-*/
-#content-container {
-    z-index: 100;
-    flex-grow: 1;
-    position: relative;
-    width: auto;
-    height: auto;
-}
-main#swup {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    position: relative;
-    width: 90%;
-    height: 100%;
-    padding: 5%;
-    padding-right: 0;
-}
-
 
 /*-/ ABOUT /-*/
 /* FORM */
@@ -467,7 +468,7 @@ main#swup {
 }
 
 #contact-mail {
-    width: calc(200% / 3);
+    width: calc(200% / 2.85);
     text-align: right;
 }
 @media (max-width: 1100px) {
