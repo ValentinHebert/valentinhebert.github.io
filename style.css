@@ -404,7 +404,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
     grid-template-columns: repeat(24, 1fr);
 }
 .gallery-i {
-    grid-template-columns: repeat(15, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 }
 .pic-tile > img {
     width: 100%;
