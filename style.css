@@ -16,7 +16,11 @@
     --pagebg-add: 10;
     --pagebg-size: calc(100% + (var(--pagebg-add) * 1%));
     --pagebg-pos: calc(0% - ((var(--pagebg-add) / 2) * 1%));
-    
+}
+:root#photographie {
+    --p-mosaicgap: clamp(0.4rem, 1vw, 1rem);
+}
+:root#contact {
     --form-padding: 13.5px;
     --bgform: #f1f1f1;
 }
@@ -415,13 +419,31 @@ main#swup {
 
 
 /*-/ PHOTOGRAPHIE /-*/
+#photo-gallery > .blocker,
+.pic-tile > img {
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+#photo-gallery  {
+    position: relative;
+}
+#photo-gallery > .blocker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 div[class^="gallery"] {
     display: grid;
-    grid-gap: 1rem;
+    grid-gap: var(--p-mosaicgap);
     width: 100%;
 }
 div[class^="gallery"]:not(:nth-child(1)) {
-    padding-top: 1rem;
+    padding-top: var(--p-mosaicgap);
 }
 .gallery-p {
     grid-template-columns: repeat(24, 1fr);
@@ -687,15 +709,17 @@ form button {
     }
 
     #parallax-bg > #fg {
-        display: none;
+        display: none !important;
     }
 
     #content-container {
         margin-left: 0 !important;
     }
     main#swup {
-        padding-bottom: 15%;
+        width: 90%;
+        padding: 7.5% 0 15% 5%;
     }
+    
 
     /*CONTACT*/
     .input-c:not(:nth-last-child(1)) {
