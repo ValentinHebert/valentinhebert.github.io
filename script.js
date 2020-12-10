@@ -27,10 +27,10 @@ window.addEventListener('devicemotion', function(event) { // check if device has
     if(event.rotationRate.alpha || event.rotationRate.beta || event.rotationRate.gamma) {
         parallaxBG.scalar(5, 3);
         var pagebgAdd = getComputedStyle(document.documentElement).getPropertyValue('--pagebg-add'),
-            parallaxBGel = document.querySelector('#parallax-bg'),
-            parallaxBGelW = parallaxBGel.offsetWidth,
-            parallaxBGelH = parallaxBGel.offsetHeight;
-        parallaxBG.limit(parallaxBGelW * pagebgAdd / 100, parallaxBGelH * pagebgAdd / 100);
+            parallaxBGgrp = document.querySelector('#parallax-bg'),
+            parallaxBGgrpW = parallaxBGgrp.offsetWidth,
+            parallaxBGgrpH = parallaxBGgrp.offsetHeight;
+        parallaxBG.limit(parallaxBGgrpW * pagebgAdd / 100, parallaxBGgrpH * pagebgAdd / 100);
     }
 });
 
@@ -169,8 +169,10 @@ function init() {
 
         function applyBGColor(ID) {
             function pageBGClass(ID) {
-                document.querySelector('#page-bg').className = '';
-                document.querySelector('#page-bg').classList.add(ID);
+                var pageBG = document.querySelector('#page-bg'),
+                    fg = document.querySelector('#fg');
+                pageBG.className = ''; fg.className = '';
+                pageBG.classList.add(ID); fg.classList.add(ID);
             }
             pageBGClass(ID);
             doc.style.setProperty('--bgpage-f', vhtrpColor[ID]);
