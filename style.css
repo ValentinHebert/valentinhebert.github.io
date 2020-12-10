@@ -16,11 +16,9 @@
     --pagebg-add: 10;
     --pagebg-size: calc(100% + (var(--pagebg-add) * 1%));
     --pagebg-pos: calc(0% - ((var(--pagebg-add) / 2) * 1%));
-}
-:root#photographie {
+
     --p-mosaicgap: clamp(0.4rem, 1vw, 1rem);
-}
-:root#contact {
+
     --form-padding: 13.5px;
     --bgform: #f1f1f1;
 }
