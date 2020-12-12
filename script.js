@@ -26,7 +26,7 @@ parallaxBG.scalar(1, 2);
 window.addEventListener('devicemotion', function(event) { // check if device has gyroscope
     if(event.rotationRate.alpha || event.rotationRate.beta || event.rotationRate.gamma) {
         parallaxBG.scalar(5, 3);
-        var pagebgAdd = getComputedStyle(document.documentElement).getPropertyValue('--pagebg-add'),
+        var pagebgAdd = getComputedStyle(doc).getPropertyValue('--pagebg-add'),
             parallaxBGgrp = document.querySelector('#parallax-bg'),
             parallaxBGgrpW = parallaxBGgrp.offsetWidth,
             parallaxBGgrpH = parallaxBGgrp.offsetHeight;
@@ -201,7 +201,7 @@ function init() {
                 }
             }
             if(ID == 'accueil') { toAccueil = true; } else { toAccueil = false; navCurrentStyle(ID); }
-            document.documentElement.id = ID;
+            doc.id = ID;
         }
         applyPageTheme(pathDir);
         applyBGColor(pathDir);
@@ -211,8 +211,8 @@ function init() {
             if(histbr == true) { event = getPageID(); }
             if(nl == null) { nl = document.querySelector('.navlink#' + event); }
 
-            var pageW = document.documentElement.clientWidth,
-                pageH = document.documentElement.clientHeight,
+            var pageW = doc.clientWidth,
+                pageH = doc.clientHeight,
                 nlID = nl.id,
                 nlNotPath = '.navlink-p:not(#' + nlID + ')',
                 nliNotPath = nlNotPath + ' .navbtns-content svg.navicons';
@@ -338,28 +338,82 @@ function init() {
         window.addEventListener('resize', function() { setTimeout(mobileTopNav, 500); });
     }
 
+    if(pathDir == 'video') {
+        videoList = [];
+        videoList.vid1 = {
+            url : 'ukOKXV1vUaA',
+            thumbnail: 'thumb-test1',
+            title: 'The city where I belong...',
+            date: "2021"
+        }
+        videoList.vid2 = {
+            url : '5M-CfgAG2n4',
+            thumbnail: 'thumb-test2',
+            title: 'Why can\' I reach it',
+            date: "2077"
+        }
+        videoList.vid3 = {
+            url : 'keF7n1eVKzE',
+            thumbnail: 'thumb-test3',
+            title: 'test3 test3 test3 test3 test3 test3 test3 test3 test3 test3 test3 test3 test3 test3 test3 ',
+            date: "1999"
+        }
+
+        Object.values(videoList).forEach(function(vid) {
+            var vidTile = document.createElement('div');
+            vidTile.classList.add("vid-tile");
+            //vidTile.setAttribute('url', vid.url);
+            vidTile.innerHTML = `
+                <div class="anim-fill"></div>
+                <div class="anim-flash"></div>
+                <div><img class="vid-thumbnail" src="../src/video/thumbnails/` + vid.thumbnail + `.jpg"></div>
+                <div class="vid-title"><span>` + vid.title + `</span></div>
+            `
+            document.querySelector('.video-list').appendChild(vidTile);
+
+
+            function vidSelect(d) {
+                document.querySelectorAll('.vid-tile').forEach(function(v) { v.classList.remove("focus"); });
+                vidTile.classList.add("focus");
+
+                document.querySelector('#player').innerHTML = `
+                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/` + vid.url + `?rel=0&color=white" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                `
+                setTimeout(function() {
+                    document.querySelector('.mvid-date').innerHTML = vid.date;
+                    document.querySelector('.mvid-title').innerHTML = vid.title;
+                }, d);
+            }
+            if(vidTile == document.querySelector('.video-list').firstChild) { vidSelect(0); };
+            vidTile.addEventListener('click', function() {
+                vidSelect(600);
+                setTimeout(function() { swup.scrollTo(document.body, 0); }, 900);
+            });
+        });
+    }
+
     if(pathDir == 'contact') {
         // FORM FOCUS (https://github.com/sefyudem/Contact-Form-HTML-CSS)
-        const inputs = document.querySelectorAll("form input, form textarea");
+        const inputs = document.querySelectorAll('form input, form textarea');
         function inputFocus(input) {
           let parent = input.parentNode;
-          parent.classList.add("focus");
-          parent.querySelector(".line").classList.add("focus");
-          input.classList.remove("notfocus");
-          input.classList.remove("fieldError");
+          parent.classList.add('focus');
+          parent.querySelector('.line').classList.add('focus');
+          input.classList.remove('notfocus');
+          input.classList.remove('fieldError');
         }
         function inputFocusBlur() {
             let parent = this.parentNode;
-            if(this.value == "") {
-                parent.classList.remove("focus");
-                parent.querySelector(".line").classList.remove("focus");
-                this.classList.add("notfocus");
+            if(this.value == '') {
+                parent.classList.remove('focus');
+                parent.querySelector('.line').classList.remove('focus');
+                this.classList.add('notfocus');
             }
         }
         inputs.forEach((input) => {
-            input.addEventListener("focus", function() { inputFocus(input) });
-            input.addEventListener("blur", inputFocusBlur);
-            if(input.value != "") { inputFocus(input); }
+            input.addEventListener('focus', function() { inputFocus(input) });
+            input.addEventListener('blur', inputFocusBlur);
+            if(input.value != '') { inputFocus(input); }
         });
 
         // FORM VALIDATION (https://www.codebrainer.com/blog/contact-form-in-javascript)
@@ -381,9 +435,9 @@ function init() {
                 if (field == null) return false;
                 let isFieldValid = validationFunction(field.value)
                 if (!isFieldValid) {
-                    field.classList.add("fieldError");
+                    field.classList.add('fieldError');
                 } else {
-                    field.classList.remove("fieldError");
+                    field.classList.remove('fieldError');
                 }
                 return isFieldValid;
             }

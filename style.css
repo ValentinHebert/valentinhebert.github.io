@@ -19,6 +19,9 @@
 
     --p-mosaicgap: clamp(0.4rem, 1vw, 1rem);
 
+    --v-padding-num: 7.5;
+    --v-padding: calc(var(--v-padding-num) * 1%);
+
     --form-padding: 13.5px;
     --bgform: #f1f1f1;
 }
@@ -449,10 +452,118 @@ div[class^="gallery"]:not(:nth-child(1)) {
 .gallery-i {
     grid-template-columns: repeat(9, 1fr);
 }
-.pic-tile > img {
+.pic-tile > img,
+.vid-thumbnail {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/*-/ VIDEO /-*/
+.main-video {
+    width: 100%;
+    height: 100%;
+}
+
+#player {
+    display: flex;
+    padding: 0 var(--v-padding);
+}
+#player > iframe {
+    height: 60vh;
+}
+
+#mvid-text {
+    padding: 1rem var(--v-padding);
+    font-size: 28px;
+    letter-spacing: 1.5px;
+    line-height: 1.5;
+    text-align: center;
+}
+.mvid-date {
+    font-weight: 300;
+}
+
+.video-list {
+    padding-top: 40px;
+}
+.vid-tile {
+    display: grid;
+    position: relative;
+    grid-template-columns: 31.5% auto;
+    margin: 0 var(--v-padding);
+    padding: 1.5rem calc(var(--v-padding) * 1.75);
+    padding-right: var(--v-padding);
+    /*background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.75), black);*/
+    overflow: hidden;
+    cursor: pointer;
+}
+.vid-thumbnail {
+    transform: scale(0.925);
+    transition: transform 0.7s cubic-bezier(0.4, 0.7, 0, 1);
+}
+.vid-title {
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    letter-spacing: 1px;
+    transition: color 0.4s ease;
+}
+.vid-title > span {
+    padding-left: 2.25rem;
+}
+
+.vid-tile::after {
+    content: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" style="color:rgba(15, 15, 15);" viewBox="0 0 32 32"><polygon fill="currentColor" points="5.2,4.7 7.8,3.2 27.3,14.5 27.3,17.5 7.8,28.8 5.2,27.3"/></svg>');
+    position: absolute;
+    top: 50%;
+    width: 38px;
+    height: 38px;
+    left: calc((((100% + (var(--v-padding) * 2)) * (var(--v-padding-num) / 100)) * 1.75) / 2); /*that's some maths for you*/
+    transform: translate(-500%, -50%) scale(6);
+    transition: transform 0.7s 50ms cubic-bezier(0.35, 0.5, 0, 1);
+}
+
+.vid-tile > div[class^="anim"] {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: white;
+    transition: 0.7s cubic-bezier(0.3, 0.6, 0, 1);
+}
+.vid-tile > .anim-flash {
+    transition-duration: 0.4s !important;
+}
+
+.vid-tile:hover > .anim-flash {
+    width: 3px;
+    transition: 0.4s cubic-bezier(0.2, 0.7, 0, 1);
+}
+
+.vid-tile.focus::after {
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.9s cubic-bezier(0.3, 0.8, 0, 1);
+}
+.vid-tile.focus > .vid-title {
+    color: var(--accent-sec);
+    transition: color 0.2s 0.1s ease;
+}
+.vid-tile.focus .vid-thumbnail {
+    transform: scale(1);
+    transition: transform 0.4s 0s cubic-bezier(0.3, 0.7, 0, 1);
+}
+.vid-tile.focus > .anim-fill {
+    width: 100%;
+    transition: 0.7s 0.4s cubic-bezier(0.5, 0.75, 0, 1);
+}
+.vid-tile.focus > .anim-flash {
+    width: 100% !important;
+    left: 100%;
+    transition: width 0.4s cubic-bezier(0.7, 0.8, 0, 1),
+                left 0.6s 0.15s cubic-bezier(0.65, 0.5, 0, 1) !important;
 }
 
 
@@ -483,7 +594,7 @@ input, textarea {
     padding: var(--form-padding);
     font-size: 20px;
     border: none !important;
-    outline: transparent !important;
+    outline: 2px solid transparent !important;
     background-color: var(--bgform) !important;
     transition: color 0.3s 0.75ms, outline 0.3s !important;
 }
@@ -544,7 +655,7 @@ textarea.notfocus {
     color: transparent !important;
 }
 .fieldError {
-    outline: 1px solid red !important;
+    outline: 2px solid red !important;
 }
 
 form #send {
