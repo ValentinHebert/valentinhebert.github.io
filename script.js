@@ -169,10 +169,13 @@ function init() {
 
         function applyBGColor(ID) {
             function pageBGClass(ID) {
-                var pageBG = document.querySelector('#page-bg'),
-                    fg = document.querySelector('#fg');
-                pageBG.className = ''; fg.className = '';
-                pageBG.classList.add(ID); fg.classList.add(ID);
+                if(ID == 'accueil') { document.querySelector('.parallax-el').innerHTML = `<video id="page-bg" autoplay muted loop><source src="/src/accueil/prllx/bg.mp4" type="video/mp4"></video>`;
+                } else { document.querySelector('.parallax-el').innerHTML = `<div id="page-bg"></div>`; }
+                var pageBG = document.querySelector('#page-bg');
+                //var fg = document.querySelector('#fg');
+                pageBG.className = '';
+                pageBG.classList.add(ID);
+                //fg.classList.add(ID); fg.className = '';
             }
             pageBGClass(ID);
             doc.style.setProperty('--bgpage-f', vhtrpColor[ID]);
