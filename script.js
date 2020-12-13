@@ -48,7 +48,7 @@ function init() {
 
     function getPageID() {
         pathDir = ((window.location.pathname).replace(/\/[^/]*$/, '')).replace(/^\//, '');
-        if(window.location.pathname == '/') { pathDir = 'accueil'; }
+        if(window.location.pathname == '/' || window.location.pathname == '/index.html') { pathDir = 'accueil'; }
         return pathDir;
     }
     getPageID();
