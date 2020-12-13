@@ -386,14 +386,14 @@ nav {
     background-image: url("/src/contact/contact-bg.jpg");
 }
 
-#parallax-bg > #fg.accueil {
+/*#parallax-bg > #fg.accueil {
     width: 100%;
     height: 100%;
     background-image: url("/src/accueil/prllx/subject.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50px 0px;
-}
+}*/
 #parallax-bg > #fg:not(.accueil) {
     display: none;
 }
@@ -499,7 +499,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
     cursor: pointer;
 }
 .vid-thumbnail {
-    transform: scale(0.925);
+    transform: rotateZ(0.01deg) scale(0.925);
     transition: transform 0.7s cubic-bezier(0.2, 0.7, 0, 1);
 }
 .vid-title {
@@ -540,7 +540,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
 }
 
 .vid-tile:hover .vid-thumbnail {
-    transform: scale(0.95);
+    transform: rotateZ(0.01deg) scale(0.95);
     transition: transform 0.3s cubic-bezier(0.1, 0.7, 0, 1);
 }
 .vid-tile:hover .vid-title > span {
@@ -557,7 +557,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
     transition: color 0.1s 0.1s linear;
 }
 .vid-tile.focus .vid-thumbnail {
-    transform: scale(1);
+    transform: rotateZ(0.01deg) scale(1);
     transition: transform 0.4s 0s cubic-bezier(0.3, 0.7, 0, 1);
 }
 .vid-tile.focus .vid-title > span {
