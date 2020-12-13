@@ -1,6 +1,6 @@
 :root#accueil,
 :root#video {
-    --accent-sec: #000000;
+    --accent-sec: var(--bgpage);
     --accent-prim: #ffffff;
 }
 :root#photographie,
@@ -485,7 +485,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
 }
 
 .video-list {
-    padding-top: 40px;
+    padding-top: 50px;
 }
 .vid-tile {
     display: grid;
@@ -500,7 +500,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
 }
 .vid-thumbnail {
     transform: scale(0.925);
-    transition: transform 0.7s cubic-bezier(0.4, 0.7, 0, 1);
+    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0, 1);
 }
 .vid-title {
     display: flex;
@@ -511,6 +511,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
 }
 .vid-title > span {
     padding-left: 2.25rem;
+    transition: padding-left 0.5s cubic-bezier(0.2, 0.7, 0, 1);
 }
 
 .vid-tile::after {
@@ -538,9 +539,13 @@ div[class^="gallery"]:not(:nth-child(1)) {
     transition-duration: 0.4s !important;
 }
 
-.vid-tile:hover > .anim-flash {
-    width: 3px;
-    transition: 0.4s cubic-bezier(0.2, 0.7, 0, 1);
+.vid-tile:hover .vid-thumbnail {
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.1, 0.7, 0, 1);
+}
+.vid-tile:hover .vid-title > span {
+    padding-left: 2.65rem;
+    transition: padding-left 0.3s cubic-bezier(0.2, 0.7, 0, 1);
 }
 
 .vid-tile.focus::after {
@@ -549,11 +554,14 @@ div[class^="gallery"]:not(:nth-child(1)) {
 }
 .vid-tile.focus > .vid-title {
     color: var(--accent-sec);
-    transition: color 0.2s 0.1s ease;
+    transition: color 0.1s 0.1s linear;
 }
 .vid-tile.focus .vid-thumbnail {
     transform: scale(1);
     transition: transform 0.4s 0s cubic-bezier(0.3, 0.7, 0, 1);
+}
+.vid-tile.focus .vid-title > span {
+    padding-left: 2.25rem !important;
 }
 .vid-tile.focus > .anim-fill {
     width: 100%;
@@ -564,6 +572,10 @@ div[class^="gallery"]:not(:nth-child(1)) {
     left: 100%;
     transition: width 0.4s cubic-bezier(0.7, 0.8, 0, 1),
                 left 0.6s 0.15s cubic-bezier(0.65, 0.5, 0, 1) !important;
+}
+html#video .focus ::selection {
+    color: var(--accent-prim);
+    background-color: var(--accent-sec);
 }
 
 

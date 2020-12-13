@@ -355,7 +355,7 @@ function init() {
         videoList.vid3 = {
             url : 'keF7n1eVKzE',
             thumbnail: 'thumb-test3',
-            title: 'test3 test3 test3 test3 test3 test3 test3 test3 test3 test3 test3 test3 test3 test3 test3 ',
+            title: 'test3 test3 test3 test3 test3 test3 test3 test3 test3 ',
             date: "1999"
         }
 
@@ -386,8 +386,10 @@ function init() {
             }
             if(vidTile == document.querySelector('.video-list').firstChild) { vidSelect(0); };
             vidTile.addEventListener('click', function() {
-                vidSelect(600);
-                setTimeout(function() { swup.scrollTo(document.body, 0); }, 900);
+                if(this.classList.contains('focus') != true) {
+                    vidSelect(600);
+                    setTimeout(function() { swup.scrollTo(document.body, 0); }, 900);
+                }
             });
         });
     }
