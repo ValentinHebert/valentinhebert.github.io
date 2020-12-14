@@ -342,7 +342,7 @@ function init() {
     }
 
     if(pathDir == 'video') {
-        videoList = [];
+        var videoList = [];
         videoList.vid1 = {
             url : 'ukOKXV1vUaA',
             thumbnail: 'thumb-test1',
@@ -379,12 +379,17 @@ function init() {
                 document.querySelectorAll('.vid-tile').forEach(function(v) { v.classList.remove("focus"); });
                 vidTile.classList.add("focus");
 
-                document.querySelector('#player-c').innerHTML = `
-                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/` + vid.url + `?rel=0&color=white" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                document.querySelector('#player').innerHTML = `
+                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/` + vid.url + `?rel=0&color=white" frameborder="0" allowfullscreen></iframe>
                 `
+                document.querySelectorAll('.mvid-txt').forEach(function(t) { t.classList.add("quit"); });
                 setTimeout(function() {
-                    document.querySelector('.mvid-date').innerHTML = vid.date;
-                    document.querySelector('.mvid-title').innerHTML = vid.title;
+                    document.querySelector('.mvid-text-d').innerHTML = `
+                        <div class="mvid-txt mvid-date">` + vid.date + `</div>
+                    `;
+                    document.querySelector('.mvid-text-t').innerHTML = `
+                        <div class="mvid-txt mvid-title">` + vid.title + `</div>
+                    `;
                 }, d);
             }
             if(vidTile == document.querySelector('.video-list').firstChild) { vidSelect(0); };
