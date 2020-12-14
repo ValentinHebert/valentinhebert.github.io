@@ -144,7 +144,8 @@ function init() {
         navAC = document.querySelector('#navaccueil-content'),
         navA = document.querySelector('.navlink#accueil'),
         navASep = document.querySelector('.nav-separator'),
-        navLBG = document.querySelector('#nav-layerbg');
+        navLBG = document.querySelector('#nav-layerbg'),
+        contentC = document.querySelector('#content-container');
 
         mNavLBG = {};
         mNavLBG.heightMin = 'clamp(40px, 8vw, 45px)';
@@ -155,7 +156,6 @@ function init() {
         mNavLBG.marginBottomMax = 10;
         
         function contentMarginCheck() {
-            var contentC = document.querySelector('#content-container');
             if(isMobile == false) { contentC.style.marginLeft = navPos.offsetWidth + 'px';
             } else {
                 var c = document.querySelector('#nl-free-paddingtop').offsetHeight + document.getElementById('navaccueil-content').offsetHeight + mNavLBG.marginTopMax + mNavLBG.marginBottomMax
@@ -175,10 +175,12 @@ function init() {
                 //var fg = document.querySelector('#fg');
                 pageBG.className = '';
                 pageBG.classList.add(ID);
-                //fg.classList.add(ID); fg.className = '';
+                //fg.className = ''; fg.classList.add(ID);
             }
             pageBGClass(ID);
             doc.style.setProperty('--bgpage-f', vhtrpColor[ID]);
+            if(ID == 'video') { contentC.classList.add('overflowXHidden');
+            } else { contentC.classList.remove('overflowXHidden'); }
             accenttxtContentUpdate();
         }
         function accenttxtContentUpdate() {
@@ -278,6 +280,8 @@ function init() {
             }, 400);
             setTimeout(function() {
                 applyBGColor(nlID);
+            }, 600);
+            setTimeout(function() {
                 newVHTRC.style.transition = 'opacity 600ms ease';
                 newVHTRC.style.opacity = '0';
                 setTimeout(function() {
