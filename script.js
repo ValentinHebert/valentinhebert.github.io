@@ -369,7 +369,7 @@ function init() {
             vidTile.innerHTML = `
                 <div class="anim-fill"></div>
                 <div class="anim-flash"></div>
-                <div><img class="vid-thumbnail" src="../src/video/thumbnails/` + vid.thumbnail + `.jpg"></div>
+                <div class="vid-thumb-c"><img class="vid-thumbnail" src="../src/video/thumbnails/` + vid.thumbnail + `.jpg"><div class="blocker"></div></div>
                 <div class="vid-title"><span>` + vid.title + `</span></div>
             `
             document.querySelector('.video-list').appendChild(vidTile);
@@ -385,7 +385,7 @@ function init() {
                 document.querySelectorAll('.mvid-txt').forEach(function(t) { t.classList.add("quit"); });
                 setTimeout(function() {
                     document.querySelector('.mvid-text-d').innerHTML = `
-                        <div class="mvid-txt mvid-date">` + vid.date + `</div>
+                        <div class="mvid-txt mvid-date">` + vid.date + `&nbsp;</div>
                     `;
                     document.querySelector('.mvid-text-t').innerHTML = `
                         <div class="mvid-txt mvid-title">` + vid.title + `</div>
