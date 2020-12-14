@@ -16,7 +16,7 @@ var parallaxBG = new Parallax(document.getElementById('parallax-bg'), {
 var doc = document.documentElement,
     isMobile = undefined,
     svgNS = 'http://www.w3.org/2000/svg',
-    vhtrpColor = {'accueil' : '#424242', 'photographie' : '#f5f5f5', 'video' : '#0f0f0f', 'contact' : '#D2D2D2'};
+    vhtrpColor = {'accueil' : '#4B4B4B', 'photographie' : '#F7F7F7', 'video' : '#0F0F0F', 'contact' : '#D2D2D2'};
 
 function checkWinSize() { if(window.innerWidth > 727) { isMobile = false; } else { isMobile = true; }};
 checkWinSize(); window.addEventListener('resize', checkWinSize);
