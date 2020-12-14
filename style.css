@@ -409,6 +409,7 @@ nav {
     position: relative;
     width: auto;
     height: auto;
+    overflow-x: hidden;
 }
 main#swup {
     display: flex;
@@ -473,13 +474,23 @@ div[class^="gallery"]:not(:nth-child(1)) {
     display: flex;
     padding: 0 var(--v-padding);
 }
-#player > iframe {
-    height: 60vh;
+#player-c {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 56.25%; /*1:1 100% - 16:9 56.25% - 4:3 75% - 3:2 66.66% - 8:5 62.5%*/
+}
+#player-c > iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 #mvid-text {
     padding: 1rem var(--v-padding);
-    font-size: 28px;
+    font-size: clamp(20px, 2vw, 28px);
     letter-spacing: 1.5px;
     line-height: 1.5;
     text-align: center;
@@ -489,7 +500,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
 }
 
 .video-list {
-    padding-top: 50px;
+    padding-top: clamp(20px, 3vw, 50px);
 }
 .vid-tile {
     display: grid;
@@ -497,8 +508,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
     grid-template-columns: 31.5% auto;
     margin: 0 var(--v-padding);
     padding: 1.5rem calc(var(--v-padding) * 1.75);
-    padding-right: var(--v-padding);
-    /*background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.75), black);*/
+    padding-right: calc(var(--v-padding) / 1.75);
     overflow: hidden;
     cursor: pointer;
 }
@@ -509,7 +519,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
 .vid-title {
     display: flex;
     align-items: center;
-    font-size: 22px;
+    font-size: clamp(16px, 1.75vw, 22px);
     letter-spacing: 1px;
     transition: color 0.4s ease;
 }
@@ -522,8 +532,8 @@ div[class^="gallery"]:not(:nth-child(1)) {
     content: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" style="color:rgba(15, 15, 15);" viewBox="0 0 32 32"><polygon fill="currentColor" points="5.2,4.7 7.8,3.2 27.3,14.5 27.3,17.5 7.8,28.8 5.2,27.3"/></svg>');
     position: absolute;
     top: 50%;
-    width: 38px;
-    height: 38px;
+    width: clamp(24px, 2.25vw, 38px);
+    height: clamp(24px, 2.25vw, 38px);
     left: calc((((100% + (var(--v-padding) * 2)) * (var(--v-padding-num) / 100)) * 1.75) / 2); /*that's some maths for you*/
     transform: translate(-500%, -50%) scale(6);
     transition: transform 0.7s 50ms cubic-bezier(0.35, 0.5, 0, 1);
@@ -594,11 +604,6 @@ html#video .focus ::selection {
 #contact-mail {
     width: calc(200% / 2.85);
     text-align: right;
-}
-@media (max-width: 1100px) {
-    #contact-mail {
-        width: 100%;
-    }
 }
 
 input, textarea {
@@ -766,9 +771,16 @@ form button {
     }
 }
 
+@media (max-width: 1100px) /* INTERMEDIATE */ {
+    #contact-mail {
+        width: 100%;
+    }
+}
+
 @media (max-width: 727px) /* MOBILE */ {
     :root {
         --pagebg-add: 35;
+        --v-padding-num: 0;
     }
     .navlink-p > div span,
     .navlink-p .nav-sel {
@@ -842,11 +854,43 @@ form button {
     }
     main#swup {
         width: 90%;
-        padding: 7.5% 0 15% 5%;
+        padding: 8.5% 0 15% 5%;
     }
     
+    /* VIDEO */
+    .video-list {
+        width: 115%;
+    }
 
-    /*CONTACT*/
+    #mvid-text {
+        font-size: clamp(18px, 4vw, 24px);
+    }
+    .vid-title {
+        font-size: clamp(15px, 2.75vw, 20px);
+    }
+    .vid-tile {
+        grid-template-columns: 30% auto;
+        margin: 0;
+        padding: 1.15rem 15%;
+        padding-right: 7.5%;
+        overflow: visible;
+    }
+    .vid-tile::after {
+        left: 8.25%;
+    }
+
+    .vid-title > span {
+        padding-left: 0.65rem;
+    }
+    .vid-tile:hover .vid-title > span {
+        padding-left: 1rem;
+    }
+    .vid-tile.focus .vid-title > span {
+        padding-left: 1rem !important;
+    }
+
+
+    /* CONTACT */
     .input-c:not(:nth-last-child(1)) {
         margin-bottom: 20px;
     }

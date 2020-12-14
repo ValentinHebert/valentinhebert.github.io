@@ -379,7 +379,7 @@ function init() {
                 document.querySelectorAll('.vid-tile').forEach(function(v) { v.classList.remove("focus"); });
                 vidTile.classList.add("focus");
 
-                document.querySelector('#player').innerHTML = `
+                document.querySelector('#player-c').innerHTML = `
                     <iframe width="1280" height="720" src="https://www.youtube.com/embed/` + vid.url + `?rel=0&color=white" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 `
                 setTimeout(function() {
