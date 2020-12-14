@@ -1,11 +1,11 @@
 :root#accueil,
 :root#video {
-    --accent-sec: var(--bgpage);
+    --accent-sec: var(--bgpage-f);
     --accent-prim: #ffffff;
 }
 :root#photographie,
 :root#contact {
-    --accent-sec: #ffffff;
+    --accent-sec: var(--bgpage-f);
     --accent-prim: #000000;
 }
 :root {
@@ -501,16 +501,16 @@ div[class^="mvid-text-"] {
 }
 
 @keyframes mvidtxt-Spawn {
-    0% { transform: translateY(100%); }
-    100% { transform: translateY(0); }
+    0% { transform: rotateZ(0.001deg) translateY(100%); }
+    100% { transform: rotateZ(0.001deg) translateY(0); }
 }
 @keyframes mvidtxt-Quit {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-110%); }
+    0% { transform: rotateZ(0.001deg) translateY(0); }
+    100% { transform: rotateZ(0.001deg) translateY(-110%); }
 }
 .mvid-txt {
-    transform: translateY(0);
-    animation: mvidtxt-Spawn 0.9s cubic-bezier(0.5, 0.6, 0, 1) both;
+    transform: rotateZ(0.001deg) translateY(0);
+    animation: mvidtxt-Spawn 0.7s cubic-bezier(0.3, 0.6, 0, 1) both;
 }
 .mvid-txt.quit {
     animation: mvidtxt-Quit 0.7s 50ms cubic-bezier(0.3, 0.6, 0, 1) both;
