@@ -395,7 +395,7 @@ function init() {
             if(vidTile == document.querySelector('.video-list').firstChild) { vidSelect(0); };
             vidTile.addEventListener('click', function() {
                 if(this.classList.contains('focus') != true) {
-                    vidSelect(750);
+                    vidSelect(800);
                     setTimeout(function() { swup.scrollTo(document.body, 0); }, 900);
                 }
             });
