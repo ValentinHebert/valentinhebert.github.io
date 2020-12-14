@@ -497,12 +497,12 @@ div[class^="gallery"]:not(:nth-child(1)) {
 #player::after {
     z-index: -1;
     content: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" style="color:rgba(255, 255, 255);" viewBox="0 0 32 32"><polygon fill="currentColor" points="7.8,4.7 10.3,3.2 29.9,14.5 29.9,17.5 10.3,28.8 7.8,27.3"/></svg>');
-    width: clamp(40px, 4vw, 75px);
-    height: clamp(40px, 4vw, 75px);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: clamp(40px, 4vw, 75px);
+    height: clamp(40px, 4vw, 75px);
     animation: fakePlayerLoading 1.5s cubic-bezier(0.5, 0.2, 0, 0.6) infinite;
 }
 
