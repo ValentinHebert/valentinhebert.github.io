@@ -524,14 +524,14 @@ div[class^="mvid-text-"] {
 }
 @keyframes mvidtxt-Quit {
     0% { transform: rotateZ(0.001deg) translateY(0); }
-    100% { transform: rotateZ(0.001deg) translateY(-110%); }
+    100% { transform: rotateZ(0.001deg) translateY(-100%); }
 }
 .mvid-txt {
     transform: rotateZ(0.001deg) translateY(0);
-    animation: mvidtxt-Spawn 0.7s cubic-bezier(0.3, 0.6, 0, 1) both;
+    animation: mvidtxt-Spawn 0.6s cubic-bezier(0.2, 0.6, 0, 1) both;
 }
 .mvid-txt.quit {
-    animation: mvidtxt-Quit 0.7s 50ms cubic-bezier(0.3, 0.6, 0, 1) both;
+    animation: mvidtxt-Quit 0.5s 50ms cubic-bezier(0.3, 0.6, 0, 1) both;
 }
 
 .mvid-date {
@@ -570,7 +570,7 @@ div[class^="mvid-text-"] {
     transition: color 0.4s ease;
 }
 .vid-title > span {
-    padding-left: 2.25rem;
+    padding-left: clamp(1rem, 2vw, 2.25rem);
     transition: padding-left 0.5s cubic-bezier(0.2, 0.7, 0, 1);
 }
 
@@ -604,7 +604,7 @@ div[class^="mvid-text-"] {
     transition: transform 0.3s cubic-bezier(0.1, 0.7, 0, 1);
 }
 .vid-tile:hover .vid-title > span {
-    padding-left: 2.65rem;
+    padding-left: clamp(1.25rem, 2.25vw, 2.7rem);
     transition: padding-left 0.3s cubic-bezier(0.2, 0.7, 0, 1);
 }
 
@@ -621,7 +621,7 @@ div[class^="mvid-text-"] {
     transition: transform 0.4s 0s cubic-bezier(0.3, 0.7, 0, 1);
 }
 .vid-tile.focus .vid-title > span {
-    padding-left: 2.25rem !important;
+    padding-left: clamp(1rem, 2vw, 2.25rem) !important;
 }
 .vid-tile.focus > .anim-fill {
     width: 100%;
