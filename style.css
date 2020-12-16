@@ -726,6 +726,7 @@ textarea.notfocus {
 }
 
 form #send {
+    width: 100%;
     padding: 10px 20px;
     border: none;
     background-color: var(--bgform);
