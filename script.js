@@ -348,28 +348,27 @@ function init() {
     if(pathDir == 'video') {
         var videoList = [];
         videoList.vid1 = {
-            url : 'ukOKXV1vUaA',
-            thumbnail: 'thumb-test1',
-            title: 'The city where I belong...',
-            date: "2021"
+            url : 'e3URyWxuRPI',
+            thumbnail : 'j-billkovac',
+            title : 'Une journée avec Bill Kovac',
+            date : "2020"
         }
         videoList.vid2 = {
-            url : '5M-CfgAG2n4',
-            thumbnail: 'thumb-test2',
-            title: 'Why can\' I reach it',
-            date: "2077"
+            url : 'HM0IX5rDkUA',
+            thumbnail : 'jfm-noel',
+            title : 'Jordanne FM : marché de Noël',
+            date : "2017"
         }
         videoList.vid3 = {
-            url : 'keF7n1eVKzE',
-            thumbnail: 'thumb-test3',
-            title: 'test3 test3 test3 test3 test3 test3 test3 test3 test3 ',
-            date: "1999"
+            url : 'TwK9atbu_MA',
+            thumbnail : 'jfm-devanim',
+            title : 'Jordanne FM : devenez animateur/rice',
+            date : "2017"
         }
 
         Object.values(videoList).forEach(function(vid) {
             var vidTile = document.createElement('div');
             vidTile.classList.add("vid-tile");
-            //vidTile.setAttribute('url', vid.url);
             vidTile.innerHTML = `
                 <div class="anim-fill"></div>
                 <div class="anim-flash"></div>
