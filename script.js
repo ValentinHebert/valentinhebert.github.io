@@ -22,6 +22,33 @@ function checkWinSize() { if(window.innerWidth > 727) { isMobile = false; } else
 checkWinSize(); window.addEventListener('resize', checkWinSize);
 
 
+//-- VIDEO PLAYLIST --
+// derniere video ici se trouvera en haut de la playlist sur le site
+// fait juste un copier-coller d'un objet "{...}," et remplace les infos
+// miniatures: "src/video/thumbnails/" ; n'oublie pas l'extension du fichier (".jpg/.png")
+var videoList = [
+    {
+        url : 'TwK9atbu_MA',
+        thumbnail : 'jfm-devanim.jpg',
+        title : 'Jordanne FM : devenez animateur/rice',
+        date : "2017"
+    },
+    {
+        url : 'HM0IX5rDkUA',
+        thumbnail : 'jfm-noel.jpg',
+        title : 'Jordanne FM : marché de Noël',
+        date : "2017"
+    },
+    {
+        url : 'e3URyWxuRPI',
+        thumbnail : 'j-billkovac.jpg',
+        title : 'Une journée avec Bill Kovac',
+        date : "2020"
+    },
+];
+videoList.reverse();
+
+
 parallaxBG.scalar(1, 2);
 window.addEventListener('devicemotion', function(event) { // check if device has gyroscope
     if(event.rotationRate.alpha || event.rotationRate.beta || event.rotationRate.gamma) {
@@ -346,33 +373,13 @@ function init() {
     }
 
     if(pathDir == 'video') {
-        var videoList = [];
-        videoList.vid1 = {
-            url : 'e3URyWxuRPI',
-            thumbnail : 'j-billkovac',
-            title : 'Une journée avec Bill Kovac',
-            date : "2020"
-        }
-        videoList.vid2 = {
-            url : 'HM0IX5rDkUA',
-            thumbnail : 'jfm-noel',
-            title : 'Jordanne FM : marché de Noël',
-            date : "2017"
-        }
-        videoList.vid3 = {
-            url : 'TwK9atbu_MA',
-            thumbnail : 'jfm-devanim',
-            title : 'Jordanne FM : devenez animateur/rice',
-            date : "2017"
-        }
-
         Object.values(videoList).forEach(function(vid) {
             var vidTile = document.createElement('div');
             vidTile.classList.add("vid-tile");
             vidTile.innerHTML = `
                 <div class="anim-fill"></div>
                 <div class="anim-flash"></div>
-                <div class="vid-thumb-c"><img class="vid-thumbnail" src="../src/video/thumbnails/` + vid.thumbnail + `.jpg"><div class="blocker"></div></div>
+                <div class="vid-thumb-c"><img class="vid-thumbnail" src="../src/video/thumbnails/` + vid.thumbnail + `"><div class="blocker"></div></div>
                 <div class="vid-title"><span>` + vid.title + `</span></div>
             `
             document.querySelector('.video-list').appendChild(vidTile);
