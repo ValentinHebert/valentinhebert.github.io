@@ -23,6 +23,8 @@
     --v-padding: calc(var(--v-padding-num) * 1%);
 
     --form-padding: 13.5px;
+    --c-social-size: clamp(32px, 4vw, 47.5px);
+    --c-social-padding: clamp(50px, 4vw, 75px);
     --bgform: #f1f1f1;
 }
 
@@ -39,6 +41,7 @@ body {
     background-color: var(--bgpage-f);
     opacity: 1;
     animation: opacity-FadeIn 0.5s 0.15s ease backwards;
+    overflow-x: hidden;
 }
 body, input, textarea, button {
     font-family: "Roboto Slab";
@@ -410,9 +413,6 @@ nav {
     width: auto;
     height: auto;
 }
-#content-container.overflowXHidden {
-    overflow-x: hidden;
-}
 main#swup {
     display: flex;
     align-items: center;
@@ -421,7 +421,7 @@ main#swup {
     position: relative;
     width: 80%;
     height: 100%;
-    padding: 7.5% 10%;
+    padding: 6.5% 10%;
     padding-right: 0;
 }
 
@@ -465,6 +465,25 @@ div[class^="gallery"]:not(:nth-child(1)) {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.pic-tile {
+    position: relative;
+}
+
+#photo-viewer {
+    z-index: 1200;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    pointer-events: none;
+}
+.picvbg {
+    position: fixed;
+    background-color: var(--bgpage-f);
 }
 
 /*-/ VIDEO /-*/
@@ -646,6 +665,8 @@ html#video .focus ::selection {
     display: flex;
     justify-content: center;
     width: 100%;
+    margin-top: var(--c-social-size);
+    padding-top: var(--c-social-padding);
 }
 
 #contact-mail {
@@ -784,12 +805,13 @@ form button {
 
 /* social links */
 #social-links {
-    position: absolute;
+    width: var(--c-social-size);
+    height: var(--c-social-size);
+    position: relative;
+    padding-top: var(--c-social-padding);
 }
 .social-link {
     display: block;
-    width: clamp(32px, 4vw, 47.5px);
-    height: auto;
     fill: var(--accenttxt);
 }
 
@@ -814,9 +836,6 @@ form button {
         min-height: 100%;
         margin-top: 0 !important;
     }
-    #social-links {
-        bottom: 0;
-    }
 }
 
 @media (max-width: 1100px) /* INTERMEDIATE */ {
@@ -829,6 +848,7 @@ form button {
     :root {
         --pagebg-add: 35;
         --v-padding-num: 0;
+        --c-social-size: clamp(42.5px, 7.5vw, 50px);
     }
     .navlink-p > div span,
     .navlink-p .nav-sel {
@@ -907,7 +927,7 @@ form button {
     
     /* VIDEO */
     .video-list {
-        width: 115%;
+        width: 110%;
     }
 
     #mvid-text {
@@ -921,7 +941,7 @@ form button {
         margin: 0;
         padding: 1.15rem 15%;
         padding-right: 7.5%;
-        overflow: visible;
+        /*overflow: visible;*/
         user-select: none;
     }
     .vid-tile::after {
@@ -942,12 +962,5 @@ form button {
     /* CONTACT */
     .input-c:not(:nth-last-child(1)) {
         margin-bottom: 20px;
-    }
-    #social-links {
-        top: 100%;
-        padding-bottom: 15%;
-    }
-    .social-link {
-        width: clamp(42.5px, 7.5vw, 50px);
     }
 }

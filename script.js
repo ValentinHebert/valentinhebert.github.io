@@ -206,8 +206,6 @@ function init() {
             }
             pageBGClass(ID);
             doc.style.setProperty('--bgpage-f', vhtrpColor[ID]);
-            if(ID == 'video') { contentC.classList.add('overflowXHidden');
-            } else { contentC.classList.remove('overflowXHidden'); }
             accenttxtContentUpdate();
         }
         function accenttxtContentUpdate() {
@@ -373,7 +371,7 @@ function init() {
     }
 
     if(pathDir == 'video') {
-        Object.values(videoList).forEach(function(vid) {
+        videoList.forEach(function(vid) {
             var vidTile = document.createElement('div');
             vidTile.classList.add("vid-tile");
             vidTile.innerHTML = `
