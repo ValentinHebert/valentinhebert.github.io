@@ -370,6 +370,72 @@ function init() {
         window.addEventListener('resize', function() { setTimeout(mobileTopNav, 500); });
     }
 
+    if(pathDir == 'photographie') {
+        var pViewer = document.querySelector('#photo-viewer');
+        if(!pViewer) { 
+            var pViewer = document.createElement('div');
+            pViewer.id = "photo-viewer";
+            document.querySelector('#container').appendChild(pViewer);
+        }
+
+
+        function viewPic() {
+            thumbSRC = this.firstChild.getAttribute('src');
+            var picName = thumbSRC.substr(thumbSRC.lastIndexOf('/') + 1);
+            console.log(picName);
+
+            var picVC = document.createElement('div');
+            picVC.classList.add("picv-container"); picVC.setAttribute('img-name', picName);
+            document.querySelector('#photo-viewer').appendChild(picVC);
+            
+            picVC.innerHTML = `
+                <div class="picv-bg"></div>
+                <div class="picv-img-c"><img class="picv-img" src="../src/photographie/thumbnails/` + picName + `"></img></div>
+                
+            `
+            var picVbg = picVC.querySelector('.picv-bg'),
+                picVimgC = picVC.querySelector('.picv-img-c'),
+                thumbTop = this.getBoundingClientRect().top,
+                thumbLeft = this.getBoundingClientRect().left,
+                thumbW = this.offsetWidth,
+                thumbH = this.offsetHeight;
+
+            picVC.querySelectorAll('div[class^="picv-"]').forEach(function(p) {
+                p.style.top = thumbTop + 'px';
+                p.style.left = thumbLeft + 'px';
+                p.style.width = thumbW + 'px';
+                p.style.height = thumbH + 'px';
+            });
+
+            if(thumbW * (window.innerHeight / thumbH) >  window.innerWidth) {
+                picVimgC.style.flexDirection = "row";
+            } else {
+                picVimgC.style.flexDirection = "column";
+            }
+
+            function picVScaleUpAnim() {
+                picVC.classList.add('full');
+            }
+            setTimeout(picVScaleUpAnim, 25);
+
+            // Quit Photo Viewer
+            picVbg.addEventListener('click', function() {
+                console.log("quit pv");
+                var picVC = document.querySelector('.picv-container:last-child');
+                picVC.classList.remove('full');
+                setTimeout(function() { picVC.remove(); }, 600);
+            });
+        }
+
+        document.querySelectorAll('.pic-tile').forEach(function(pic) {
+            pic.addEventListener('click', viewPic);
+        });
+
+    } else{
+        var pViewer = document.querySelector('#photo-viewer');
+        if(pViewer) { pViewer.remove(); }
+    } 
+
     if(pathDir == 'video') {
         videoList.forEach(function(vid) {
             var vidTile = document.createElement('div');
