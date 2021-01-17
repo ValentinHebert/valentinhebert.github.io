@@ -400,6 +400,14 @@ function init() {
                 thumbW = this.offsetWidth,
                 thumbH = this.offsetHeight;
 
+            // Load Higher Res Picture (https://stackoverflow.com/a/54123157)
+            function loadHighResImage(elem, highResUrl) {
+                let image = new Image();
+                image.addEventListener('load', () => elem.src = highResUrl);
+                image.src = highResUrl;
+            };
+            loadHighResImage(picVC.querySelector('.picv-img'), '../src/photographie/high/' + picName);
+
             picVC.querySelectorAll('div[class^="picv-"]').forEach(function(p) {
                 p.style.top = thumbTop + 'px';
                 p.style.left = thumbLeft + 'px';
