@@ -382,7 +382,7 @@ function init() {
         function viewPic() {
             thumbSRC = this.firstChild.getAttribute('src');
             var picName = thumbSRC.substr(thumbSRC.lastIndexOf('/') + 1);
-            console.log(picName);
+            this.classList.add("focus");
 
             var picVC = document.createElement('div');
             picVC.classList.add("picv-container"); picVC.setAttribute('img-name', picName);
@@ -392,7 +392,6 @@ function init() {
                 <div class="bgblocker"></div>
                 <div class="picv-bg"></div>
                 <div class="picv-img-c"><img class="picv-img" src="../src/photographie/thumbnails/` + picName + `"></div>
-                
             `
             var picVbg = picVC.querySelector('.picv-bg'),
                 picVimgC = picVC.querySelector('.picv-img-c'),
@@ -408,6 +407,7 @@ function init() {
                 image.addEventListener('load', () => elem.src = highResUrl);
                 image.src = highResUrl;
             };
+            picVimg.style.backgroundImage = 'url("../src/photographie/thumbnails/' + picName + '")';
             loadHighResImage(picVimg, '../src/photographie/high/' + picName);
 
             picVC.querySelectorAll('div[class^="picv-"]').forEach(function(p) {
@@ -432,18 +432,19 @@ function init() {
 
             // Quit Photo Viewer
             function QuitPV() {
-                console.log("quit pv");
                 window.removeEventListener('scroll', QuitPV);
                 var picVC = document.querySelector('.picv-container:last-child');
                 picVC.classList.remove('full');
                 picVC.style.pointerEvents = 'none';
                 setTimeout(function() { 
-                    picVC.remove();
+                    document.querySelectorAll('.pic-tile.focus').forEach(function(pt) { pt.classList.remove("focus"); });
+                }, 425);
+                setTimeout(function() { 
                     window.removeEventListener('scroll', QuitPVScroll);
+                    picVC.remove();
                 }, 1000);
             }
             function QuitPVScroll() {
-                console.log("--- quit pv-scroll");
                 picVC.querySelectorAll('div[class^="picv-"]').forEach(function(p) {
                     p.style.transform = 'translateY(' + (initScrollY - window.scrollY) + 'px)';
                 });
