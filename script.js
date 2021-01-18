@@ -460,6 +460,7 @@ function init() {
                 window.removeEventListener('scroll', QuitPV);
                 picVC.classList.remove('full');
                 picVC.style.pointerEvents = 'none';
+                hideCurClose(picVC);
                 setTimeout(function() { 
                     document.querySelectorAll('.pic-tile.focus').forEach(function(pt) { pt.classList.remove("focus"); });
                 }, 425);
