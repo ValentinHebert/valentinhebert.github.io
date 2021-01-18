@@ -470,13 +470,16 @@ div[class^="gallery"]:not(:nth-child(1)) {
 .pic-tile {
     position: relative;
     cursor: pointer;
-    transform: rotateZ(0.001deg) scale(0.9875);
-    transition: transform 0.4s cubic-bezier(0.2, 0.5, 0, 1);
+    overflow: hidden;
 }
-.pic-tile:hover,
-.pic-tile.focus {
+.pic-tile > img {
+    transform: rotateZ(0.001deg) scale(1.05);
+    transition: transform 0.6s cubic-bezier(0.2, 0.6, 0, 1);
+}
+.pic-tile:hover > img,
+.pic-tile.focus > img {
     transform: rotateZ(0.01deg) scale(1);
-    transition: transform 0.2s cubic-bezier(0.05, 0.7, 0, 1);
+    transition: transform 0.25s cubic-bezier(0.05, 0.7, 0, 1);
 }
 
 #photo-viewer {
@@ -517,10 +520,11 @@ div[class^="gallery"]:not(:nth-child(1)) {
     transform: translateY(0px);
 }
 .picv-bg {
-    background-color: var(--bgpage-f);
+    background-color: var(--bgpage);
     transition: 0.5s 50ms cubic-bezier(0.7, 0.4, 0, 1),
                 opacity 0.5s 0.35s ease,
-                transform 1ms linear;
+                transform 1ms linear,
+                background-color var(--VHTRP-txttr);
     cursor: pointer;
 }
 .picv-img-c {

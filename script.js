@@ -411,10 +411,10 @@ function init() {
             loadHighResImage(picVimg, '../src/photographie/high/' + picName);
 
             picVC.querySelectorAll('div[class^="picv-"]').forEach(function(p) {
-                p.style.top = thumbTop + 'px';
-                p.style.left = thumbLeft + 'px';
-                p.style.width = (thumbW + 1) + 'px';
-                p.style.height = (thumbH + 1) + 'px';
+                p.style.top = (thumbTop - 2) + 'px';
+                p.style.left = (thumbLeft - 2) + 'px';
+                p.style.width = (thumbW + 2) + 'px';
+                p.style.height = (thumbH + 2) + 'px';
             });
 
             if(thumbW * (window.innerHeight / thumbH) >  window.innerWidth) {
@@ -431,9 +431,8 @@ function init() {
             setTimeout(picVScaleUpAnim, 25);
 
             // Quit Photo Viewer
-            function QuitPV() {
+            function QuitPV(picVC) {
                 window.removeEventListener('scroll', QuitPV);
-                var picVC = document.querySelector('.picv-container:last-child');
                 picVC.classList.remove('full');
                 picVC.style.pointerEvents = 'none';
                 setTimeout(function() { 
@@ -449,8 +448,8 @@ function init() {
                     p.style.transform = 'translateY(' + (initScrollY - window.scrollY) + 'px)';
                 });
             }
-            picVbg.addEventListener('click', QuitPV);
-            window.addEventListener('scroll', QuitPV);
+            picVbg.addEventListener('click', function() { QuitPV(picVC); });
+            window.addEventListener('scroll', function() { QuitPV(picVC); });
             var initScrollY = window.scrollY;
             window.addEventListener('scroll', QuitPVScroll);
         }
