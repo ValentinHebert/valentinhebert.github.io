@@ -392,7 +392,14 @@ function init() {
                 <div class="bgblocker"></div>
                 <div class="picv-bg"></div>
                 <div class="picv-img-c"><img class="picv-img" src="../src/photographie/thumbnails/` + picName + `"></div>
+                <div class="pv-curclose">
+                    <svg viewBox="0 0 32 32">
+                        <line x1="26.3" y1="26.3" x2="5.7" y2="5.7"/>
+                        <line x1="5.7" y1="26.3" x2="26.3" y2="5.7"/>
+                    </svg>
+                </div>
             `
+
             var picVbg = picVC.querySelector('.picv-bg'),
                 picVimgC = picVC.querySelector('.picv-img-c'),
                 picVimg = picVC.querySelector('.picv-img'),
@@ -429,6 +436,24 @@ function init() {
                 picVC.classList.add('full');
             }
             setTimeout(picVScaleUpAnim, 25);
+
+            // Fake Close on hover
+            function moveCurClose(event) {
+                var cursorX = event.clientX,
+                    cursorY = event.clientY,
+                    iconClose = picVC.querySelector('.pv-curclose');
+                    iconClose.style.top = cursorY + 'px';
+                    iconClose.style.left = cursorX + 'px';
+            }
+            function showCurClose(picVC) {
+                picVC.querySelector('.pv-curclose').classList.add("hover");
+            }
+            function hideCurClose(picVC) {
+                picVC.querySelector('.pv-curclose').classList.remove("hover");
+            }
+            picVbg.addEventListener('mousemove', moveCurClose);
+            picVbg.addEventListener('mouseover', function() { showCurClose(picVC); });
+            picVbg.addEventListener('mouseout', function() { hideCurClose(picVC); });
 
             // Quit Photo Viewer
             function QuitPV(picVC) {
