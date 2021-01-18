@@ -390,7 +390,7 @@ function init() {
             
             picVC.innerHTML = `
                 <div class="picv-bg"></div>
-                <div class="picv-img-c"><img class="picv-img" src="../src/photographie/thumbnails/` + picName + `"></img></div>
+                <div class="picv-img-c"><img class="picv-img" src="../src/photographie/thumbnails/` + picName + `"></div>
                 
             `
             var picVbg = picVC.querySelector('.picv-bg'),
@@ -427,12 +427,26 @@ function init() {
             setTimeout(picVScaleUpAnim, 25);
 
             // Quit Photo Viewer
-            picVbg.addEventListener('click', function() {
+            function QuitPV() {
                 console.log("quit pv");
+                window.removeEventListener('scroll', QuitPV);
                 var picVC = document.querySelector('.picv-container:last-child');
                 picVC.classList.remove('full');
-                setTimeout(function() { picVC.remove(); }, 600);
-            });
+                setTimeout(function() { 
+                    picVC.remove();
+                    window.removeEventListener('scroll', QuitPVScroll);
+                }, 600);
+            }
+            function QuitPVScroll() {
+                console.log("--- quit pv-scroll");
+                picVC.querySelectorAll('div[class^="picv-"]').forEach(function(p) {
+                    p.style.transform = 'translateY(' + (initScrollY - window.scrollY) + 'px)';
+                });
+            }
+            picVbg.addEventListener('click', QuitPV);
+            window.addEventListener('scroll', QuitPV);
+            var initScrollY = window.scrollY;
+            window.addEventListener('scroll', QuitPVScroll);
         }
 
         document.querySelectorAll('.pic-tile').forEach(function(pic) {
