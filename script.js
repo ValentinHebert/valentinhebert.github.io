@@ -395,6 +395,7 @@ function init() {
             `
             var picVbg = picVC.querySelector('.picv-bg'),
                 picVimgC = picVC.querySelector('.picv-img-c'),
+                picVimg = picVC.querySelector('.picv-img'),
                 thumbTop = this.getBoundingClientRect().top,
                 thumbLeft = this.getBoundingClientRect().left,
                 thumbW = this.offsetWidth,
@@ -406,7 +407,7 @@ function init() {
                 image.addEventListener('load', () => elem.src = highResUrl);
                 image.src = highResUrl;
             };
-            loadHighResImage(picVC.querySelector('.picv-img'), '../src/photographie/high/' + picName);
+            loadHighResImage(picVimg, '../src/photographie/high/' + picName);
 
             picVC.querySelectorAll('div[class^="picv-"]').forEach(function(p) {
                 p.style.top = thumbTop + 'px';
@@ -417,8 +418,10 @@ function init() {
 
             if(thumbW * (window.innerHeight / thumbH) >  window.innerWidth) {
                 picVimgC.style.flexDirection = "row";
+                picVimg.style.width = "100%";
             } else {
                 picVimgC.style.flexDirection = "column";
+                picVimg.style.height = "100%";
             }
 
             function picVScaleUpAnim() {
