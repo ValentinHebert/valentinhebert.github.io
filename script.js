@@ -389,6 +389,7 @@ function init() {
             document.querySelector('#photo-viewer').appendChild(picVC);
             
             picVC.innerHTML = `
+                <div class="bgblocker"></div>
                 <div class="picv-bg"></div>
                 <div class="picv-img-c"><img class="picv-img" src="../src/photographie/thumbnails/` + picName + `"></div>
                 
@@ -435,10 +436,11 @@ function init() {
                 window.removeEventListener('scroll', QuitPV);
                 var picVC = document.querySelector('.picv-container:last-child');
                 picVC.classList.remove('full');
+                picVC.style.pointerEvents = 'none';
                 setTimeout(function() { 
                     picVC.remove();
                     window.removeEventListener('scroll', QuitPVScroll);
-                }, 600);
+                }, 1000);
             }
             function QuitPVScroll() {
                 console.log("--- quit pv-scroll");

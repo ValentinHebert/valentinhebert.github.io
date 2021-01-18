@@ -486,27 +486,12 @@ div[class^="gallery"]:not(:nth-child(1)) {
     width: 100%;
     height: 100%;
 }
-.picv-bg,
-.picv-img-c {
+.bgblocker {
     position: fixed;
-    opacity: 0;
-    transform: translateY(0px);
-    transition: 0.6s ease,
-                transform 1ms linear;
-}
-.picv-bg,
-.picv-img {
-    pointer-events: all;
-}
-.picv-bg {
-    background-color: var(--bgpage-f);
-    cursor: pointer;
-}
-.picv-img-c {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
 }
 .picv-img {
@@ -515,13 +500,37 @@ div[class^="gallery"]:not(:nth-child(1)) {
     max-height: 100%;
     object-fit: contain;
 }
+.picv-bg,
+.picv-img-c {
+    position: fixed;
+    opacity: 0;
+    transform: translateY(0px);
+}
+.picv-bg {
+    background-color: var(--bgpage-f);
+    transition: 0.5s 50ms cubic-bezier(0.7, 0.4, 0, 1),
+                opacity 0.5s 0.35s ease,
+                transform 1ms linear;
+    cursor: pointer;
+}
+.picv-img-c {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: 0.5s 50ms cubic-bezier(0.5, 0.6, 0, 1),
+                opacity 0.2s 0.2s ease,
+                transform 1ms linear;
+    pointer-events: none;
+}
 .picv-container.full .picv-bg {
     width: 100% !important;
     height: 100% !important;
     top: 0 !important;
     left: 0 !important;
     opacity: 1;
-    transition: 0.6s ease;
+    transition: 0.65s 0.1s cubic-bezier(0.55, 0.8, 0, 1.01),
+                opacity 0.3s ease;
 }
 .picv-container.full .picv-img-c {
     width: 90% !important;
@@ -529,7 +538,17 @@ div[class^="gallery"]:not(:nth-child(1)) {
     top: 10% !important;
     left: 5% !important;
     opacity: 1;
-    transition: 0.6s ease;
+    transition: 0.5s 0.15s cubic-bezier(0.4, 0.7, 0, 1),
+                opacity 0.75s cubic-bezier(0.9, 0.7, 0, 1);
+}
+.picv-container.full .bgblocker,
+.picv-bg,
+.picv-img {
+    pointer-events: all;
+}
+.picv-container:not(.full) .picv-bg,
+.picv-container:not(.full) .picv-img {
+    pointer-events: none !important;
 }
 
 /*-/ VIDEO /-*/
