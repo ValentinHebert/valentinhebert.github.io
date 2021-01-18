@@ -412,8 +412,8 @@ function init() {
             picVC.querySelectorAll('div[class^="picv-"]').forEach(function(p) {
                 p.style.top = thumbTop + 'px';
                 p.style.left = thumbLeft + 'px';
-                p.style.width = thumbW + 'px';
-                p.style.height = thumbH + 'px';
+                p.style.width = (thumbW + 1) + 'px';
+                p.style.height = (thumbH + 1) + 'px';
             });
 
             if(thumbW * (window.innerHeight / thumbH) >  window.innerWidth) {
