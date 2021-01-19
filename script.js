@@ -165,6 +165,11 @@ function init() {
             </div>
         `;
 
+        function navIconsTr(tr) {
+            document.querySelectorAll('.navlink .navbtns-content svg.navicons > g *').forEach(function(ni) { ni.style.transition = tr; });
+        }
+        navIconsTr("none");
+
         navIcons = document.querySelectorAll('.navlink .navbtns-content svg.navicons'),
         navDiv = document.querySelectorAll('a.navlink > div'),
         nav = document.querySelector('nav'),
@@ -368,6 +373,8 @@ function init() {
         mobileTopNav();
         window.addEventListener('scroll', mobileTopNav);
         window.addEventListener('resize', function() { setTimeout(mobileTopNav, 500); });
+
+        navIconsTr(null);
     }
 
     if(pathDir == 'photographie') {
