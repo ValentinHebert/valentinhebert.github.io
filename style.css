@@ -543,10 +543,24 @@ div[class^="gallery"]:not(:nth-child(1)) {
 }
 .pv-curclose svg {
     transform: rotateZ(0deg);
+    transition: transform 0.2s linear;
 }
 .pv-curclose.hover svg {
     animation: curClose-Spin 0.6s cubic-bezier(0.1, 0.75, 0, 1);
 }
+.picv-bg:active ~ .pv-curclose svg {
+    stroke-width: 3.5 !important;
+    transform: scale(1.25);
+    transition: transform 0.1s linear,
+                stroke-width 0.1s ease;
+}
+.pv-curclose svg.quit {
+    stroke-width: 3.5 !important;
+    transform: scale(1.2) !important;
+    transition: transform 0s,
+                stroke-width 0.1s !important;
+}
+
 .picv-bg,
 .picv-img-c {
     position: fixed;

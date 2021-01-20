@@ -386,13 +386,13 @@ function init() {
         }
 
 
-        function viewPic() {
+        function viewPic(ev) {
             thumbSRC = this.firstChild.getAttribute('src');
             var picName = thumbSRC.substr(thumbSRC.lastIndexOf('/') + 1);
             this.classList.add("focus");
 
             var picVC = document.createElement('div');
-            picVC.classList.add("picv-container"); picVC.setAttribute('img-name', picName);
+            picVC.classList.add("picv-container");
             document.querySelector('#photo-viewer').appendChild(picVC);
             
             picVC.innerHTML = `
@@ -444,7 +444,7 @@ function init() {
             }
             setTimeout(picVScaleUpAnim, 25);
 
-            // Fake Close on hover
+            // Cursor Close on BG hover
             function moveCurClose(event) {
                 var cursorX = event.clientX,
                     cursorY = event.clientY,
@@ -458,15 +458,17 @@ function init() {
             function hideCurClose(picVC) {
                 picVC.querySelector('.pv-curclose').classList.remove("hover");
             }
+            moveCurClose(ev);
             picVbg.addEventListener('mousemove', moveCurClose);
             picVbg.addEventListener('mouseover', function() { showCurClose(picVC); });
             picVbg.addEventListener('mouseout', function() { hideCurClose(picVC); });
 
             // Quit Photo Viewer
-            function QuitPV(picVC) {
-                window.removeEventListener('scroll', QuitPV);
+            function QuitPV(picVC,t) {
+                window.removeEventListener('scroll', function() { QuitPV(picVC,"s"); });
                 picVC.classList.remove('full');
                 picVC.style.pointerEvents = 'none';
+                if(t == "c") { picVC.querySelector('.pv-curclose svg').classList.add("quit"); }
                 hideCurClose(picVC);
                 setTimeout(function() { 
                     document.querySelectorAll('.pic-tile.focus').forEach(function(pt) { pt.classList.remove("focus"); });
@@ -481,8 +483,8 @@ function init() {
                     p.style.transform = 'translateY(' + (initScrollY - window.scrollY) + 'px)';
                 });
             }
-            picVbg.addEventListener('click', function() { QuitPV(picVC); });
-            window.addEventListener('scroll', function() { QuitPV(picVC); });
+            picVbg.addEventListener('click', function() { QuitPV(picVC,"c"); });
+            window.addEventListener('scroll', function() { QuitPV(picVC,"s"); });
             var initScrollY = window.scrollY;
             window.addEventListener('scroll', QuitPVScroll);
         }
