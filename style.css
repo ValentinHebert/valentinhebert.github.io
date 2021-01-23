@@ -478,7 +478,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
 }
 .pic-tile:hover > img,
 .pic-tile.focus > img {
-    transform: rotateZ(0.01deg) scale(1);
+    transform: rotateZ(0.01deg) scale(1.005);
     transition: transform 0.25s cubic-bezier(0.05, 0.7, 0, 1);
 }
 
@@ -749,7 +749,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
 }
 
 .vid-tile:hover .vid-thumbnail {
-    transform: rotateZ(0.01deg) scale(1);
+    transform: rotateZ(0.01deg) scale(1.005);
     transition: transform 0.3s cubic-bezier(0.1, 0.7, 0, 1);
 }
 .vid-tile:hover .vid-title > span {
@@ -758,7 +758,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
 }
 
 .vid-tile.focus::after {
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1.005);
     transition: transform 0.9s cubic-bezier(0.3, 0.8, 0, 1);
 }
 .vid-tile.focus > .vid-title {
