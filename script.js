@@ -621,7 +621,7 @@ function init() {
                 document.querySelector('#y-ad a').classList.remove('hover');
             }
         }
-        window.onscroll = yAdShowTxt;
+        //window.onscroll = yAdShowTxt;
     }
 }
 init();
