@@ -415,6 +415,29 @@ function init() {
                 thumbW = this.offsetWidth,
                 thumbH = this.offsetHeight;
 
+            // Cursor Close on BG hover
+            function moveCurClose(event) {
+                var cursorX = event.clientX,
+                    cursorY = event.clientY;
+                console.log(cursorX)
+                iconClose = picVC.querySelector('.pv-curclose');
+                iconClose.style.top = cursorY + 'px';
+                iconClose.style.left = cursorX + 'px';
+            }
+            function showCurClose(picVC) {
+                picVC.querySelector('.pv-curclose').classList.add("hover");
+            }
+            function hideCurClose(picVC) {
+                picVC.querySelector('.pv-curclose').classList.remove("hover");
+            }
+            moveCurClose(ev);
+            picVbg.addEventListener('mousemove', moveCurClose);
+            picVbg.addEventListener('mouseover', function() { showCurClose(picVC); });
+            picVbg.addEventListener('mouseout', function() { hideCurClose(picVC); });
+
+            picVC.addEventListener('mousemove', moveCurClose);
+            setTimeout(function() { picVC.removeEventListener('mousemove', moveCurClose); }, 800);
+
             // Load Higher Res Picture (https://stackoverflow.com/a/54123157)
             function loadHighResImage(elem, highResUrl) {
                 let image = new Image();
@@ -443,25 +466,6 @@ function init() {
                 picVC.classList.add('full');
             }
             setTimeout(picVScaleUpAnim, 25);
-
-            // Cursor Close on BG hover
-            function moveCurClose(event) {
-                var cursorX = event.clientX,
-                    cursorY = event.clientY,
-                    iconClose = picVC.querySelector('.pv-curclose');
-                    iconClose.style.top = cursorY + 'px';
-                    iconClose.style.left = cursorX + 'px';
-            }
-            function showCurClose(picVC) {
-                picVC.querySelector('.pv-curclose').classList.add("hover");
-            }
-            function hideCurClose(picVC) {
-                picVC.querySelector('.pv-curclose').classList.remove("hover");
-            }
-            moveCurClose(ev);
-            picVbg.addEventListener('mousemove', moveCurClose);
-            picVbg.addEventListener('mouseover', function() { showCurClose(picVC); });
-            picVbg.addEventListener('mouseout', function() { hideCurClose(picVC); });
 
             // Quit Photo Viewer
             function QuitPV(picVC,t) {
