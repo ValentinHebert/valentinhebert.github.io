@@ -70,6 +70,20 @@ function removeClassAll(path, c) {
     if(elems) { elems.forEach(function(el) { el.classList.remove(c); }); }
 }
 
+
+function yAdShowTxt() {
+    console.log("call")
+    if(isMobile) {
+        if((window.innerHeight + window.scrollY + 5) >= ((doc && doc.scrollHeight) || document.body.scrollHeight)) {
+            document.querySelector('#y-ad a').classList.add('hover');
+        } else {
+            document.querySelector('#y-ad a').classList.remove('hover');
+        }
+    } else {
+        document.querySelector('#y-ad a').classList.remove('hover');
+    }
+}
+
 function init() {
     var navPos = document.querySelector('#nav-pos');
 
@@ -609,18 +623,9 @@ function init() {
         });
 
         // Y-AD
-        function yAdShowTxt() {
-            if(isMobile) {
-                if((window.innerHeight + window.scrollY + 5) >= ((doc && doc.scrollHeight) || document.body.scrollHeight)) {
-                    document.querySelector('#y-ad a').classList.add('hover');
-                } else {
-                    document.querySelector('#y-ad a').classList.remove('hover');
-                }
-            } else {
-                document.querySelector('#y-ad a').classList.remove('hover');
-            }
-        }
-        //window.onscroll = yAdShowTxt;
+        window.addEventListener('scroll', yAdShowTxt);
+    } else {
+        window.removeEventListener('scroll', yAdShowTxt);
     }
 }
 init();
