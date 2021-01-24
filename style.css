@@ -948,6 +948,99 @@ form button {
     fill: var(--accenttxt);
 }
 
+/* Y AD */
+#y-ad {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 1rem 1.5rem;
+}
+#y-ad > a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--accenttxt);
+    transform: scale(1);
+    transition: color var(--VHTRP-txttr);
+    pointer-events: all;
+    cursor: pointer;
+}
+#y-ad svg {
+    order: 1;
+    width: clamp(25px, 2.35vw, 30px);
+    min-width: clamp(25px, 2.35vw, 30px);
+    height: clamp(25px, 2.35vw, 30px);
+    fill: var(--accenttxt);
+    opacity: 0.25;
+    transition: transform 0.6s cubic-bezier(1, 0.3, 0, 1),
+                opacity 0.8s cubic-bezier(0.3, 0.7, 0, 1);
+}
+#y-ad span {
+    order: 0;
+    width: 0;
+    height: 100%;
+    margin-right: 5px;
+    font-size: clamp(10px, 2.35vw, 14px);
+    letter-spacing: 0px;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0;
+    transform: scale(1) translateY(100px);
+    transition: 0.6s cubic-bezier(1, 0.15, 0, 1),
+                opacity 0.5s,
+                width 0s 0.35s;
+    overflow: hidden;
+}
+
+#y-ad a:hover svg,
+#y-ad a:focus svg,
+#y-ad a.hover svg {
+    opacity: 1;
+    transition: transform 0.6s cubic-bezier(1, 0.3, 0, 1),
+                opacity 0.5s ease;
+}
+#y-ad a:hover span,
+#y-ad a:focus span,
+#y-ad a.hover span {
+    width: 100%;
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+    transition: 0.5s cubic-bezier(0.3, 0.7, 0, 1),
+                opacity 0.3s,
+                width 0s;
+}
+#y-ad span:hover {
+    opacity: 1 !important;
+}
+#y-ad svg:hover + span {
+    opacity: 0.5 !important;
+}
+
+#y-ad svg:active,
+#y-ad span:active {
+    transition: 0.3s cubic-bezier(0.1, 0.7, 0, 1) !important;
+}
+#y-ad svg:active {
+    transform: scale(0.8) !important;
+}
+#y-ad span:active {
+    transform: scale(0.9) translateY(0px) !important;
+    opacity: 0.8 !important;
+    transition: 0.3s cubic-bezier(0.1, 0.7, 0, 1) !important;
+}
+
+@media (max-width: 1475px) {
+    html#contact main#swup {
+        padding-bottom: 4.5%;
+    }
+    #y-ad {
+        position: relative;
+        padding: 1.75rem 0 0 1.5rem;
+        margin-left: auto;
+        overflow: hidden;
+    }
+}
+
 
 @media (min-width: 728px) /* PC */ {
     #nav-layerbg {

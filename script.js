@@ -474,10 +474,10 @@ function init() {
                 picVC.style.pointerEvents = 'none';
                 if(t == "c") { picVC.querySelector('.pv-curclose svg').classList.add("quit"); }
                 hideCurClose(picVC);
-                setTimeout(function() { 
+                setTimeout(function() {
                     document.querySelectorAll('.pic-tile.focus').forEach(function(pt) { pt.classList.remove("focus"); });
                 }, 425);
-                setTimeout(function() { 
+                setTimeout(function() {
                     window.removeEventListener('scroll', QuitPVScroll);
                     picVC.remove();
                 }, 1000);
@@ -608,6 +608,20 @@ function init() {
                 window.location.href = 'mailto:valentinhebertcontact@gmail.com?body=' + encodeURIComponent(body) + '&subject=Contact - ' + cmFields.name.value;
             }
         });
+
+        // Y-AD
+        function yAdShowTxt() {
+            if(isMobile) {
+                if((window.innerHeight + window.scrollY + 5) >= ((doc && doc.scrollHeight) || document.body.scrollHeight)) {
+                    document.querySelector('#y-ad a').classList.add('hover');
+                } else {
+                    document.querySelector('#y-ad a').classList.remove('hover');
+                }
+            } else {
+                document.querySelector('#y-ad a').classList.remove('hover');
+            }
+        }
+        window.onscroll = yAdShowTxt;
     }
 }
 init();
