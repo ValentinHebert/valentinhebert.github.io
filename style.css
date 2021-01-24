@@ -513,6 +513,7 @@ div[class^="gallery"]:not(:nth-child(1)) {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    user-select: none;
 }
 .pv-curclose {
     position: fixed;
