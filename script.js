@@ -419,7 +419,6 @@ function init() {
             function moveCurClose(event) {
                 var cursorX = event.clientX,
                     cursorY = event.clientY;
-                console.log(cursorX)
                 iconClose = picVC.querySelector('.pv-curclose');
                 iconClose.style.top = cursorY + 'px';
                 iconClose.style.left = cursorX + 'px';
