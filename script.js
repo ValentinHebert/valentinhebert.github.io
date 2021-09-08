@@ -40,10 +40,28 @@ var videoList = [
         date : "2017"
     },
     {
+        url : 'ppRJ5F-27Ig',
+        thumbnail : 'IUT-aurillac.jpg',
+        title : 'IUT Aurillac : Université Clermont Auvergne',
+        date : "2018"
+    },
+    {
         url : 'e3URyWxuRPI',
         thumbnail : 'j-billkovac.jpg',
         title : 'Une journée avec Bill Kovac',
         date : "2020"
+    },
+    {
+        url : 'CpDRnsu-KZ4',
+        thumbnail : 'cam-soni-fr.jpg',
+        title : 'La caméra familiale de SONI France',
+        date : "2021"
+    },
+    {
+        url : 'eQjAUAu8lAs',
+        thumbnail : 'nothing-wrong-its-perfect-80s.jpg',
+        title : 'There is nothing wrong with the weather : it\'s gonna be perfect',
+        date : "2021"
     },
 ];
 videoList.reverse();
