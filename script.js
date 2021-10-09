@@ -63,6 +63,12 @@ var videoList = [
         title : 'There is nothing wrong with the weather : it\'s gonna be perfect',
         date : "2021"
     },
+    {
+        url : 'eO51Ahr4Xi8',
+        thumbnail : 'loop-minia.jpg',
+        title : 'Boucle de présenation : Keith Alexander',
+        date : "2021"
+    },
 ];
 videoList.reverse();
 
