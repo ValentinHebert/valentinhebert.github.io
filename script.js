@@ -65,7 +65,7 @@ var videoList = [
     },
     {
         url : 'eO51Ahr4Xi8',
-        thumbnail : 'loop-minia.jpg',
+        thumbnail : 'loop-minia.png',
         title : 'Boucle de présentation : Keith Alexander',
         date : "2021"
     },
