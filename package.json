@@ -1,0 +1,9 @@
+{
+  "name": "valentinhebert.github.io",
+  "version": "1.0.2",
+  "devDependencies": {
+    "@swup/scroll-plugin": "^1.0.6",
+    "parallax-js": "^3.1.0",
+    "swup": "^2.0.11"
+  }
+}
