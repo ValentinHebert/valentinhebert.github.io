@@ -51,24 +51,6 @@ var videoList = [
         title : 'Une journée avec Bill Kovac',
         date : "2020"
     },
-    {
-        url : 'CpDRnsu-KZ4',
-        thumbnail : 'cam-soni-fr.jpg',
-        title : 'La caméra familiale de SONI France',
-        date : "2021"
-    },
-    {
-        url : 'eQjAUAu8lAs',
-        thumbnail : 'nothing-wrong-its-perfect-80s.jpg',
-        title : 'There is nothing wrong with the weather : it\'s gonna be perfect',
-        date : "2021"
-    },
-    {
-        url : 'eO51Ahr4Xi8',
-        thumbnail : 'loop-minia.jpg',
-        title : 'Boucle de présentation : Keith Alexander',
-        date : "2021"
-    },
 ];
 videoList.reverse();
 
